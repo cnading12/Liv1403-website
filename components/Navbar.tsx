@@ -1,148 +1,207 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-
-const NAV_ITEMS = [
-  { label: 'About', href: '/about' },
-  { label: 'Multi-Family', href: '/multi-family' },
-  { label: 'Custom Homes', href: '/custom-homes' },
-  { label: 'Commercial', href: '/commercial' },
-  { label: 'Contractor', href: '/contractor' },
-  { label: 'Contact', href: '/contact' },
-];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showNav, setShowNav] = useState(true);
-  const lastScroll = useRef(0);
-
-  // Lock body scroll when menu is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
-
-  // Scroll hide/show for navbar (desktop only)
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerWidth < 768) return;
-      const current = window.scrollY;
-      if (current <= 0) {
-        setShowNav(true);
-        lastScroll.current = 0;
-        return;
-      }
-      if (current < lastScroll.current) {
-        setShowNav(true);
-      } else if (current > lastScroll.current) {
-        setShowNav(false);
-      }
-      lastScroll.current = current;
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   return (
-    <header
-      className={`fixed z-50 w-full top-0 left-0 transition-transform duration-300 ease-in-out
-        ${showNav || menuOpen ? 'translate-y-0' : '-translate-y-full'}
-      `}
-      style={{ willChange: 'transform' }}
-    >
-      {/* Desktop Navbar */}
-      <div className="w-full bg-black shadow-xl backdrop-blur-md">
-        <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center shrink-0 z-50">
-            <Image
-              src="/images/logo/c3h-white.svg"
-              alt="C3H Logo"
-              width={150}
-              height={88}
-              className="mr-3"
-              priority
-            />
-          </Link>
-          <div className="hidden md:flex gap-8 text-lg">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="font-semibold text-white hover:text-blue-200 hover:underline transition"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          {/* Hamburger */}
-          <button
-            className="md:hidden text-white z-50 relative"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((v) => !v)}
-          >
-            {menuOpen ? <X size={32} /> : <Menu size={32} />}
-          </button>
-        </nav>
-      </div>
-
-      {/* Mobile Drawer */}
-      {menuOpen && (
-        <div className="
-    md:hidden
-    fixed inset-0 z-[100]
-    bg-black
-    flex flex-col
-    transition
-    min-h-screen
-    w-full
-  ">
-          {/* Top Bar: logo and close button */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-800">
-            <Link
-              href="/"
-              className="flex items-center shrink-0"
-              onClick={() => setMenuOpen(false)}
-              tabIndex={0}
-            >
-              <Image
-                src="/images/logo/c3h-white.svg"
-                alt="C3H Logo"
-                width={130}
-                height={60}
-                className="mr-1"
-                priority
-              />
+    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo and Title */}
+          <div className="flex items-center space-x-3">
+            <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+              Liv 1403
             </Link>
-            <button
-              aria-label="Close menu"
-              onClick={() => setMenuOpen(false)}
-              className="text-white hover:text-blue-300 p-2 focus:outline-none"
+            <div className="text-sm text-gray-600 hidden md:block">Luxury Development</div>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-8">
+            {isHomePage ? (
+              <>
+                <a 
+                  href="#overview" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Overview
+                </a>
+                <a 
+                  href="#location" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Location
+                </a>
+                <a 
+                  href="#financials" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Financials
+                </a>
+                <a 
+                  href="#investment" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Investment
+                </a>
+              </>
+            ) : (
+              <>
+                <Link 
+                  href="/#overview" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Overview
+                </Link>
+                <Link 
+                  href="/#location" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Location
+                </Link>
+                <Link 
+                  href="/#financials" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Financials
+                </Link>
+                <Link 
+                  href="/#investment" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Investment
+                </Link>
+              </>
+            )}
+            <Link 
+              href="/investor" 
+              className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
             >
-              <X size={38} />
+              Investor Portal
+            </Link>
+          </div>
+          
+          {/* Contact Button & Mobile Menu */}
+          <div className="flex items-center space-x-4">
+            <button className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium">
+              Contact
+            </button>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
             </button>
           </div>
-          {/* Nav Links */}
-          <nav className="flex flex-col gap-7 pt-10 px-8">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-white text-2xl font-semibold py-2 hover:text-blue-200 transition"
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
         </div>
-      )}
-    </header>
+        
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
+            <div className="flex flex-col space-y-3 pt-4">
+              {isHomePage ? (
+                <>
+                  <a
+                    href="#overview"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Overview
+                  </a>
+                  <a
+                    href="#location"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Location
+                  </a>
+                  <a
+                    href="#financials"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Financials
+                  </a>
+                  <a
+                    href="#investment"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Investment
+                  </a>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/#overview"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Overview
+                  </Link>
+                  <Link
+                    href="/#location"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Location
+                  </Link>
+                  <Link
+                    href="/#financials"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Financials
+                  </Link>
+                  <Link
+                    href="/#investment"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Investment
+                  </Link>
+                </>
+              )}
+              <Link
+                href="/investor"
+                className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Investor Portal
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
   );
 }
