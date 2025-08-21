@@ -37,7 +37,7 @@ export default function InvestmentPortal() {
           <meta name="robots" content="noindex, nofollow" />
         </Head>
 
-        <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-6">
+        <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center px-6 pt-[16px]">
           <div className="max-w-md w-full">
             {/* Logo/Title */}
             <div className="text-center mb-8">
@@ -137,7 +137,7 @@ export default function InvestmentPortal() {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <main className="bg-gray-50">
+      <main className="bg-gray-50 pt-[92px] min-h-screen">
         {/* Header */}
         <div className="bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-6 py-6">

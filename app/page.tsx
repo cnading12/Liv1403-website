@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 const HERO_IMAGES = [
   { src: '/images/hero/liv1403-exterior.jpg', alt: 'Liv 1403 Luxury Development Exterior' },
@@ -98,12 +98,18 @@ export default function Home() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-yellow-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-700 transition-all duration-300 transform hover:scale-105">
+                <a 
+                  href="#financials"
+                  className="bg-yellow-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-700 transition-all duration-300 transform hover:scale-105 inline-block text-center"
+                >
                   View Investment Details
-                </button>
-                <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300">
-                  Download Pro Forma
-                </button>
+                </a>
+                <a 
+                  href="/investor"
+                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 inline-block text-center"
+                >
+                  Investor Portal
+                </a>
               </div>
             </div>
           </div>
@@ -225,6 +231,7 @@ export default function Home() {
                     <div>• Washington Park & Denver Zoo</div>
                     <div>• University of Denver</div>
                     <div>• Farmers Market (Weekly)</div>
+                    <div>• National Women's Soccer League Future Stadium</div>
                   </div>
                 </div>
               </div>
@@ -241,6 +248,126 @@ export default function Home() {
                     <div>Platt Park / Old South Pearl Neighborhood</div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Market Comparables */}
+        <section className="py-20 bg-white">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Market Position
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Liv 1403 is strategically positioned among Denver's most prestigious neighborhoods, offering exceptional value in the luxury market.
+              </p>
+            </div>
+            
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl font-bold mb-6 text-gray-900">Comparable Neighborhoods</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-medium">Platt Park / Old South Pearl</span>
+                    <span className="text-yellow-600 font-semibold">Our Location</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-medium">LoHi (Highlands)</span>
+                    <span className="text-gray-600">Premium Comparable</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-medium">Cherry Creek</span>
+                    <span className="text-gray-600">Luxury Benchmark</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-medium">Union Station</span>
+                    <span className="text-gray-600">Urban Core</span>
+                  </div>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <span className="font-medium">Downtown Denver</span>
+                    <span className="text-gray-600">Central Business District</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-50 p-8 rounded-xl">
+                <h4 className="text-xl font-bold mb-6 text-gray-900">Competitive Advantages</h4>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="font-semibold">Historic Character</div>
+                      <div className="text-gray-600 text-sm">Established 1893 neighborhood with authentic charm</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="font-semibold">Walkable Lifestyle</div>
+                      <div className="text-gray-600 text-sm">Tree-lined blocks with unique local businesses</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="font-semibold">Community Events</div>
+                      <div className="text-gray-600 text-sm">Farmers Market and year-round neighborhood gatherings</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <div className="font-semibold">Strategic Location</div>
+                      <div className="text-gray-600 text-sm">Central access to Washington Park, DU, and downtown</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Neighborhood Deep Dive */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Old South Pearl Neighborhood
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                A vibrant historic district that perfectly balances urban convenience with community charm.
+              </p>
+            </div>
+            
+            <div className="grid lg:grid-cols-3 gap-8 mb-12">
+              <div className="bg-white p-8 rounded-xl border border-gray-200">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Neighborhood Life</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  South Pearl Street is one of Denver's most historic and vibrant shopping districts. 
+                  Spanning Buchtel to Jewell Avenues, its tree-lined blocks offer a charming alternative 
+                  to malls, featuring unique local shops, top-rated restaurants, lively nightspots, 
+                  and year-round community events that draw visitors and locals alike.
+                </p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-xl border border-gray-200">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Community Events</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Jarman and Co Events manages the South Pearl Street Farmers Market. 
+                  They strive to support and enhance the surrounding community by providing a 
+                  Farmers Market experience where a great variety of fresh and wholesome products can be found.
+                </p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-xl border border-gray-200">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">History</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Old South Pearl Street in Denver, established in 1893, has evolved into a vibrant destination. 
+                  Once a hub for artisans and merchants, it now boasts trendy boutiques, acclaimed restaurants 
+                  like Sushi Den, lively music festivals, and a thriving farmers' market, making it a beloved community centerpiece.
+                </p>
               </div>
             </div>
           </div>
@@ -308,29 +435,54 @@ export default function Home() {
               </button>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 max-w-2xl mx-auto">
-              <h4 className="font-semibold mb-4">Contact Information</h4>
-              <div className="grid md:grid-cols-2 gap-6 text-center">
-                <ContactItem 
-                  icon="👤"
-                  label="Project Developer"
-                  value="Lance Nading"
-                />
-                <ContactItem 
-                  icon="📧"
-                  label="Email"
-                  value="lance.nading@c3hdenver.com"
-                />
-                <ContactItem 
-                  icon="📱"
-                  label="Phone"
-                  value="720-359-8337"
-                />
-                <ContactItem 
-                  icon="🌐"
-                  label="Website"
-                  value="Liv1403.com"
-                />
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 max-w-3xl mx-auto">
+              <h4 className="font-semibold mb-8 text-center text-xl">Contact Information</h4>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <div className="text-sm text-gray-300 mb-2">Project Developer</div>
+                  <div className="font-bold text-white text-lg">Lance Nading</div>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div className="text-sm text-gray-300 mb-2">Phone</div>
+                  <a href="tel:720-359-8337" className="font-bold text-white text-lg hover:text-yellow-400 transition-colors">
+                    720-359-8337
+                  </a>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div className="text-sm text-gray-300 mb-2">Email</div>
+                  <a href="mailto:lance.nading@c3hdenver.com" className="font-bold text-white text-lg hover:text-yellow-400 transition-colors break-all">
+                    lance.nading@c3hdenver.com
+                  </a>
+                </div>
+                
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+                    </svg>
+                  </div>
+                  <div className="text-sm text-gray-300 mb-2">Website</div>
+                  <a href="https://liv1403.com" className="font-bold text-white text-lg hover:text-yellow-400 transition-colors">
+                    Liv1403.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -393,17 +545,6 @@ function TimelineItem({ label, date, completed = false }: { label: string; date:
         <div className="font-medium">{label}</div>
         <div className="text-sm text-gray-600">{date}</div>
       </div>
-    </div>
-  );
-}
-
-// Component for contact items
-function ContactItem({ icon, label, value }: { icon: string; label: string; value: string }) {
-  return (
-    <div>
-      <div className="text-2xl mb-2">{icon}</div>
-      <div className="text-sm text-gray-300">{label}</div>
-      <div className="font-semibold text-white">{value}</div>
     </div>
   );
 }
