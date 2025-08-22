@@ -26,7 +26,7 @@ export default function Navbar() {
             {isHomePage ? (
               <>
                 <a 
-                  href="#overview" 
+                  href="#executive-summary" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
                   Overview
@@ -53,7 +53,7 @@ export default function Navbar() {
             ) : (
               <>
                 <Link 
-                  href="/#overview" 
+                  href="/#executive-summary" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
                   Overview
@@ -88,9 +88,12 @@ export default function Navbar() {
           
           {/* Contact Button & Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <button className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium">
+            <a 
+              href="tel:720-359-8337"
+              className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium"
+            >
               Contact
-            </button>
+            </a>
             
             {/* Mobile Menu Button */}
             <button
@@ -131,7 +134,7 @@ export default function Navbar() {
               {isHomePage ? (
                 <>
                   <a
-                    href="#overview"
+                    href="#executive-summary"
                     className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -162,7 +165,7 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link
-                    href="/#overview"
+                    href="/#executive-summary"
                     className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
