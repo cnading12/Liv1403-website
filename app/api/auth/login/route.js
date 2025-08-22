@@ -1,18 +1,17 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { supabaseAdmin } from '../../../lib/supabase'
+import { supabaseAdmin } from '../../../../lib/supabase'
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
+// Named export for POST method
+export async function POST(request) {
   try {
-    const { email, password } = req.body
+    const { email, password } = await request.json()
 
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required' })
+      return Response.json({ error: 'Email and password are required' }, { status: 400 })
     }
+
+    console.log('Login attempt for:', email)
 
     // Find user by email
     const { data: user, error: userError } = await supabaseAdmin
@@ -23,15 +22,21 @@ export default async function handler(req, res) {
       .single()
 
     if (userError || !user) {
-      return res.status(401).json({ error: 'Invalid credentials' })
+      console.error('User lookup error:', userError)
+      return Response.json({ error: 'Invalid credentials' }, { status: 401 })
     }
+
+    console.log('User found:', user.email)
 
     // Check password
     const passwordMatch = await bcrypt.compare(password, user.password_hash)
     
     if (!passwordMatch) {
-      return res.status(401).json({ error: 'Invalid credentials' })
+      console.log('Password mismatch')
+      return Response.json({ error: 'Invalid credentials' }, { status: 401 })
     }
+
+    console.log('Password matches')
 
     // Update last login
     await supabaseAdmin
@@ -53,7 +58,9 @@ export default async function handler(req, res) {
     // Remove password hash from response
     const { password_hash, ...userWithoutPassword } = user
 
-    res.status(200).json({
+    console.log('Login successful for:', user.email)
+
+    return Response.json({
       success: true,
       user: userWithoutPassword,
       token
@@ -61,6 +68,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Login error:', error)
-    res.status(500).json({ error: 'Internal server error' })
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

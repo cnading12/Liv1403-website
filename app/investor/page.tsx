@@ -2,52 +2,19 @@
 
 import { useState, useEffect } from 'react';
 
-// Mock user data - in a real app, this would come from a database
-const MOCK_USERS = [
-  { 
-    id: 1, 
-    email: 'investor1@example.com', 
-    password: 'password123', 
-    name: 'John Smith', 
-    role: 'investor',
-    status: 'active',
-    dateAdded: '2025-01-15',
-    lastLogin: '2025-08-20'
-  },
-  { 
-    id: 2, 
-    email: 'investor2@example.com', 
-    password: 'password123', 
-    name: 'Sarah Johnson', 
-    role: 'investor',
-    status: 'active',
-    dateAdded: '2025-02-01',
-    lastLogin: '2025-08-18'
-  },
-  { 
-    id: 3, 
-    email: 'admin@c3hdenver.com', 
-    password: 'admin123', 
-    name: 'Lance Nading', 
-    role: 'admin',
-    status: 'active',
-    dateAdded: '2025-01-01',
-    lastLogin: '2025-08-22'
-  }
-];
-
 export default function InvestmentPortal() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('documents');
   const [hasAgreedToDisclaimer, setHasAgreedToDisclaimer] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   
   // Admin functionality state
-  const [users, setUsers] = useState(MOCK_USERS);
+  const [users, setUsers] = useState([]);
   const [showAddUser, setShowAddUser] = useState(false);
   const [newUser, setNewUser] = useState({
     email: '',
@@ -56,7 +23,32 @@ export default function InvestmentPortal() {
     password: ''
   });
 
-  const handleLogin = (e) => {
+  // Check for existing token on page load
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    
+    if (token && userData) {
+      try {
+        const user = JSON.parse(userData);
+        setCurrentUser(user);
+        setIsAuthenticated(true);
+      } catch (error) {
+        // Clear invalid data
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+    }
+  }, []);
+
+  // Fetch users when admin panel is shown
+  useEffect(() => {
+    if (showAdminPanel && currentUser?.role === 'admin') {
+      fetchUsers();
+    }
+  }, [showAdminPanel, currentUser]);
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     
     if (!hasAgreedToDisclaimer) {
@@ -64,26 +56,44 @@ export default function InvestmentPortal() {
       return;
     }
 
-    // Find user by email and password
-    const user = users.find(u => u.email === email && u.password === password && u.status === 'active');
-    
-    if (user) {
-      setIsAuthenticated(true);
-      setCurrentUser(user);
-      setError('');
-      
-      // Update last login (in real app, this would be handled by backend)
-      const updatedUsers = users.map(u => 
-        u.id === user.id ? { ...u, lastLogin: new Date().toISOString().split('T')[0] } : u
-      );
-      setUsers(updatedUsers);
-    } else {
-      setError('Invalid email or password. Please try again.');
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Store token and user data
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        
+        setCurrentUser(data.user);
+        setIsAuthenticated(true);
+        setError('');
+      } else {
+        setError(data.error || 'Login failed. Please try again.');
+        setPassword('');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Network error. Please check your connection and try again.');
       setPassword('');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setIsAuthenticated(false);
     setCurrentUser(null);
     setEmail('');
@@ -92,16 +102,27 @@ export default function InvestmentPortal() {
     setActiveTab('documents');
   };
 
-  const handleRequestPassword = () => {
-    window.location.href = `mailto:lance.nading@c3hdenver.com?subject=Investment Portal Access Request - Liv 1403&body=Hello,%0D%0A%0D%0AI am requesting access to the Liv 1403 Investment Portal. Please provide me with login credentials.%0D%0A%0D%0AName: [Your Full Name]%0D%0AEmail: [Your Email Address]%0D%0ACompany: [Your Company Name]%0D%0APhone: [Your Phone Number]%0D%0A%0D%0AThank you,%0D%0A[Your Name]`;
+  const fetchUsers = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/users', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUsers(data.users || []);
+      } else {
+        console.error('Failed to fetch users');
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   };
 
-  const handleCall = () => {
-    window.location.href = 'tel:720-359-8337';
-  };
-
-  // Admin functions
-  const handleAddUser = (e) => {
+  const handleAddUser = async (e) => {
     e.preventDefault();
     
     // Check if email already exists
@@ -110,45 +131,108 @@ export default function InvestmentPortal() {
       return;
     }
 
-    const user = {
-      id: Math.max(...users.map(u => u.id)) + 1,
-      ...newUser,
-      status: 'active',
-      dateAdded: new Date().toISOString().split('T')[0],
-      lastLogin: 'Never'
-    };
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(newUser),
+      });
 
-    setUsers([...users, user]);
-    setNewUser({ email: '', name: '', role: 'investor', password: '' });
-    setShowAddUser(false);
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setUsers([data.user, ...users]);
+        setNewUser({ email: '', name: '', role: 'investor', password: '' });
+        setShowAddUser(false);
+        alert('User created successfully!');
+      } else {
+        alert(data.error || 'Failed to create user');
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert('Network error. Please try again.');
+    }
   };
 
-  const handleDeleteUser = (userId) => {
+  const handleDeleteUser = async (userId) => {
     if (userId === currentUser.id) {
       alert('You cannot delete your own account.');
       return;
     }
     
     if (confirm('Are you sure you want to delete this user?')) {
-      setUsers(users.filter(u => u.id !== userId));
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`/api/users/${userId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          setUsers(users.filter(u => u.id !== userId));
+          alert('User deleted successfully!');
+        } else {
+          const data = await response.json();
+          alert(data.error || 'Failed to delete user');
+        }
+      } catch (error) {
+        console.error('Error deleting user:', error);
+        alert('Network error. Please try again.');
+      }
     }
   };
 
-  const handleToggleUserStatus = (userId) => {
-    setUsers(users.map(u => 
-      u.id === userId 
-        ? { ...u, status: u.status === 'active' ? 'inactive' : 'active' }
-        : u
-    ));
+  const handleToggleUserStatus = async (userId) => {
+    const user = users.find(u => u.id === userId);
+    const newStatus = user.status === 'active' ? 'inactive' : 'active';
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUsers(users.map(u => 
+          u.id === userId ? data.user : u
+        ));
+      } else {
+        const data = await response.json();
+        alert(data.error || 'Failed to update user status');
+      }
+    } catch (error) {
+      console.error('Error updating user status:', error);
+      alert('Network error. Please try again.');
+    }
   };
 
   const generateRandomPassword = () => {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
     let result = '';
     for (let i = 0; i < 12; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     setNewUser({ ...newUser, password: result });
+  };
+
+  const handleRequestPassword = () => {
+    window.location.href = `mailto:merrittfitnessmanager@gmail.com?subject=Investment Portal Access Request - Liv 1403&body=Hello,%0D%0A%0D%0AI am requesting access to the Liv 1403 Investment Portal. Please provide me with login credentials.%0D%0A%0D%0AName: [Your Full Name]%0D%0AEmail: [Your Email Address]%0D%0ACompany: [Your Company Name]%0D%0APhone: [Your Phone Number]%0D%0A%0D%0AThank you,%0D%0A[Your Name]`;
+  };
+
+  const handleCall = () => {
+    window.location.href = 'tel:720-359-8337';
   };
 
   if (!isAuthenticated) {
@@ -184,6 +268,7 @@ export default function InvestmentPortal() {
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                   placeholder="Enter your email"
                   required
+                  disabled={loading}
                 />
               </div>
 
@@ -199,6 +284,7 @@ export default function InvestmentPortal() {
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
                   placeholder="Enter your password"
                   required
+                  disabled={loading}
                 />
               </div>
 
@@ -210,8 +296,8 @@ export default function InvestmentPortal() {
 
               <div className="bg-blue-500/20 border border-blue-500/50 rounded-lg p-3">
                 <p className="text-blue-300 text-xs mb-2"><strong>Demo Credentials:</strong></p>
-                <p className="text-blue-300 text-xs">Investor: investor1@example.com / password123</p>
-                <p className="text-blue-300 text-xs">Admin: admin@c3hdenver.com / admin123</p>
+                <p className="text-blue-300 text-xs">Admin: merrittfitnessmanager@gmail.com / Liv1403CNLN</p>
+                <p className="text-blue-300 text-xs">Use the admin account to create investor accounts</p>
               </div>
 
               <div className="bg-white/5 rounded-lg p-4">
@@ -230,6 +316,7 @@ export default function InvestmentPortal() {
                     checked={hasAgreedToDisclaimer}
                     onChange={(e) => setHasAgreedToDisclaimer(e.target.checked)}
                     className="mt-1 w-4 h-4 text-yellow-600 bg-white/10 border-white/20 rounded focus:ring-yellow-600 focus:ring-2"
+                    disabled={loading}
                   />
                   <span className="text-xs text-gray-300">
                     I have read and agree to all disclaimers and confidentiality terms, acknowledge I am an accredited investor, and understand the investment risks.
@@ -239,9 +326,10 @@ export default function InvestmentPortal() {
 
               <button
                 type="submit"
-                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:bg-yellow-700 transition-colors"
+                disabled={loading}
+                className="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Access Portal
+                {loading ? 'Signing In...' : 'Access Portal'}
               </button>
             </form>
 
@@ -360,7 +448,9 @@ export default function InvestmentPortal() {
                           {user.status}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-900">{user.lastLogin}</td>
+                      <td className="px-4 py-3 text-sm text-gray-900">
+                        {user.last_login ? new Date(user.last_login).toLocaleDateString() : 'Never'}
+                      </td>
                       <td className="px-4 py-3 text-sm">
                         <div className="flex space-x-2">
                           <button
@@ -681,7 +771,7 @@ export default function InvestmentPortal() {
               </p>
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                 <a 
-                  href="mailto:lance.nading@c3hdenver.com"
+                  href="mailto:merrittfitnessmanager@gmail.com"
                   className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium text-center"
                 >
                   Email Lance Nading
