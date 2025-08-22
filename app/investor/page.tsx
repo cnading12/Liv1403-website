@@ -1,48 +1,165 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+// Mock user data - in a real app, this would come from a database
+const MOCK_USERS = [
+  { 
+    id: 1, 
+    email: 'investor1@example.com', 
+    password: 'password123', 
+    name: 'John Smith', 
+    role: 'investor',
+    status: 'active',
+    dateAdded: '2025-01-15',
+    lastLogin: '2025-08-20'
+  },
+  { 
+    id: 2, 
+    email: 'investor2@example.com', 
+    password: 'password123', 
+    name: 'Sarah Johnson', 
+    role: 'investor',
+    status: 'active',
+    dateAdded: '2025-02-01',
+    lastLogin: '2025-08-18'
+  },
+  { 
+    id: 3, 
+    email: 'admin@c3hdenver.com', 
+    password: 'admin123', 
+    name: 'Lance Nading', 
+    role: 'admin',
+    status: 'active',
+    dateAdded: '2025-01-01',
+    lastLogin: '2025-08-22'
+  }
+];
 
 export default function InvestmentPortal() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('documents');
   const [hasAgreedToDisclaimer, setHasAgreedToDisclaimer] = useState(false);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+  
+  // Admin functionality state
+  const [users, setUsers] = useState(MOCK_USERS);
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [newUser, setNewUser] = useState({
+    email: '',
+    name: '',
+    role: 'investor',
+    password: ''
+  });
 
   const handleLogin = (e) => {
     e.preventDefault();
+    
     if (!hasAgreedToDisclaimer) {
       setError('You must agree to the disclaimers and confidentiality terms before proceeding.');
       return;
     }
-    if (password === '1403Investor') {
+
+    // Find user by email and password
+    const user = users.find(u => u.email === email && u.password === password && u.status === 'active');
+    
+    if (user) {
       setIsAuthenticated(true);
+      setCurrentUser(user);
       setError('');
+      
+      // Update last login (in real app, this would be handled by backend)
+      const updatedUsers = users.map(u => 
+        u.id === user.id ? { ...u, lastLogin: new Date().toISOString().split('T')[0] } : u
+      );
+      setUsers(updatedUsers);
     } else {
-      setError('Incorrect password. Please try again.');
+      setError('Invalid email or password. Please try again.');
       setPassword('');
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+    setEmail('');
+    setPassword('');
+    setShowAdminPanel(false);
+    setActiveTab('documents');
+  };
+
   const handleRequestPassword = () => {
-    window.location.href = 'mailto:manager@merritthouse.net?subject=Investment Portal Access Request - Liv 1403&body=Hello,%0D%0A%0D%0AI am requesting access to the Liv 1403 Investment Portal. Please provide me with the login credentials.%0D%0A%0D%0AThank you,%0D%0A[Your Name]';
+    window.location.href = `mailto:lance.nading@c3hdenver.com?subject=Investment Portal Access Request - Liv 1403&body=Hello,%0D%0A%0D%0AI am requesting access to the Liv 1403 Investment Portal. Please provide me with login credentials.%0D%0A%0D%0AName: [Your Full Name]%0D%0AEmail: [Your Email Address]%0D%0ACompany: [Your Company Name]%0D%0APhone: [Your Phone Number]%0D%0A%0D%0AThank you,%0D%0A[Your Name]`;
   };
 
   const handleCall = () => {
-    window.location.href = 'tel:303-359-8337';
+    window.location.href = 'tel:720-359-8337';
+  };
+
+  // Admin functions
+  const handleAddUser = (e) => {
+    e.preventDefault();
+    
+    // Check if email already exists
+    if (users.find(u => u.email === newUser.email)) {
+      alert('A user with this email already exists.');
+      return;
+    }
+
+    const user = {
+      id: Math.max(...users.map(u => u.id)) + 1,
+      ...newUser,
+      status: 'active',
+      dateAdded: new Date().toISOString().split('T')[0],
+      lastLogin: 'Never'
+    };
+
+    setUsers([...users, user]);
+    setNewUser({ email: '', name: '', role: 'investor', password: '' });
+    setShowAddUser(false);
+  };
+
+  const handleDeleteUser = (userId) => {
+    if (userId === currentUser.id) {
+      alert('You cannot delete your own account.');
+      return;
+    }
+    
+    if (confirm('Are you sure you want to delete this user?')) {
+      setUsers(users.filter(u => u.id !== userId));
+    }
+  };
+
+  const handleToggleUserStatus = (userId) => {
+    setUsers(users.map(u => 
+      u.id === userId 
+        ? { ...u, status: u.status === 'active' ? 'inactive' : 'active' }
+        : u
+    ));
+  };
+
+  const generateRandomPassword = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 12; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setNewUser({ ...newUser, password: result });
   };
 
   if (!isAuthenticated) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center px-6 pt-[100px]">
         <div className="max-w-md w-full">
-          {/* Logo/Title */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-white mb-2">Liv 1403</h1>
             <p className="text-gray-300">Investment Portal</p>
           </div>
 
-          {/* Login Form */}
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8">
             <div className="text-center mb-6">
               <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -51,10 +168,25 @@ export default function InvestmentPortal() {
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">Secure Access</h2>
-              <p className="text-gray-300 text-sm">Enter your password to access confidential investment materials</p>
+              <p className="text-gray-300 text-sm">Enter your credentials to access confidential investment materials</p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                   Password
@@ -65,7 +197,7 @@ export default function InvestmentPortal() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent"
-                  placeholder="Enter portal password"
+                  placeholder="Enter your password"
                   required
                 />
               </div>
@@ -76,27 +208,20 @@ export default function InvestmentPortal() {
                 </div>
               )}
 
-              {/* Disclaimer Agreement */}
+              <div className="bg-blue-500/20 border border-blue-500/50 rounded-lg p-3">
+                <p className="text-blue-300 text-xs mb-2"><strong>Demo Credentials:</strong></p>
+                <p className="text-blue-300 text-xs">Investor: investor1@example.com / password123</p>
+                <p className="text-blue-300 text-xs">Admin: admin@c3hdenver.com / admin123</p>
+              </div>
+
               <div className="bg-white/5 rounded-lg p-4">
                 <h4 className="font-semibold text-white mb-3 text-sm">Required Agreement - Confidential Investment Presentation</h4>
-                <div className="max-h-40 overflow-y-auto text-xs text-gray-300 leading-relaxed mb-3 space-y-2">
+                <div className="max-h-32 overflow-y-auto text-xs text-gray-300 leading-relaxed mb-3 space-y-2">
                   <p>
-                    <strong>Confidentiality:</strong> By accepting delivery of this investment presentation, you agree the information contained in the investment presentation is confidential, and you agree not to reproduce, disclose, or distribute to any other person, in whole or in part, the contents of this investment presentation, unless the Company provides its prior written consent.
+                    <strong>Confidentiality:</strong> By accessing this portal, you agree the information is confidential and will not be disclosed to any other person without prior written consent.
                   </p>
                   <p>
-                    <strong>No Representations or Warranties:</strong> Neither the Company nor the Manager, nor any of their respective representatives or affiliates, makes any representation, warranty, or guaranty of any kind, express or implied, as to the accuracy, completeness, or reasonableness of the information contained in this investment presentation.
-                  </p>
-                  <p>
-                    <strong>Not an Offer to Sell Securities:</strong> This investment presentation does not constitute an offer to sell, or a solicitation of an offer to buy, any security. You should not use any information in this investment presentation as the basis for making any investment-related decision.
-                  </p>
-                  <p>
-                    <strong>Investment Documents:</strong> Interests in the Company will be offered only pursuant to the terms of a subscription agreement and a limited liability company operating agreement. All investments in the Company are illiquid, and there is no assurance that the Company will achieve any targeted investment returns, or any returns at all. Investors in the Company could lose their entire investment.
-                  </p>
-                  <p>
-                    <strong>Knowledge and Experience:</strong> By accepting delivery of this investment presentation, you acknowledge that you (a) are knowledgeable and experienced with respect to investments such as investments in the Company and (b) will make your own investigation and evaluation of an investment in the Company.
-                  </p>
-                  <p>
-                    <strong>Forward Looking Statements:</strong> Certain information in this investment presentation is based on estimates, projections, and assumptions, including construction costs, labor and materials costs, governmental approvals and permits, values of assets, cap rates, interest rates, population growth, and macro-economic conditions. Neither the Manager nor the Company provides any assurances that any estimate, projection, or assumption will prove to be accurate.
+                    <strong>Investment Risk:</strong> All investments are high risk and you could lose your entire investment. No returns are guaranteed.
                   </p>
                 </div>
                 <label className="flex items-start space-x-3">
@@ -107,7 +232,7 @@ export default function InvestmentPortal() {
                     className="mt-1 w-4 h-4 text-yellow-600 bg-white/10 border-white/20 rounded focus:ring-yellow-600 focus:ring-2"
                   />
                   <span className="text-xs text-gray-300">
-                    I have read and agree to all disclaimers and confidentiality terms above, acknowledge I am an accredited investor, and understand that I could lose my entire investment.
+                    I have read and agree to all disclaimers and confidentiality terms, acknowledge I am an accredited investor, and understand the investment risks.
                   </span>
                 </label>
               </div>
@@ -133,7 +258,7 @@ export default function InvestmentPortal() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span>Request Password</span>
+                  <span>Request Access</span>
                 </button>
                 
                 <button
@@ -143,7 +268,7 @@ export default function InvestmentPortal() {
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <span>Call 303-359-8337</span>
+                  <span>Call 720-359-8337</span>
                 </button>
               </div>
             </div>
@@ -160,28 +285,188 @@ export default function InvestmentPortal() {
     );
   }
 
-  // Authenticated Portal Content
   return (
     <main className="bg-gray-50 pt-[92px] min-h-screen">
-      {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Investment Portal</h1>
-              <p className="text-gray-600 mt-1">Liv 1403 - Confidential Investor Materials</p>
+              <p className="text-gray-600 mt-1">
+                Welcome, {currentUser.name} • Liv 1403 - Confidential Investor Materials
+              </p>
             </div>
-            <button
-              onClick={() => setIsAuthenticated(false)}
-              className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              Logout
-            </button>
+            <div className="flex items-center space-x-4">
+              {currentUser.role === 'admin' && (
+                <button
+                  onClick={() => setShowAdminPanel(!showAdminPanel)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  {showAdminPanel ? 'Hide Admin' : 'Admin Panel'}
+                </button>
+              )}
+              <button
+                onClick={handleLogout}
+                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Navigation Tabs */}
+      {showAdminPanel && currentUser.role === 'admin' && (
+        <div className="bg-blue-50 border-b border-blue-200">
+          <div className="max-w-7xl mx-auto px-6 py-6">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-blue-900">User Management</h2>
+              <button
+                onClick={() => setShowAddUser(true)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Add New User
+              </button>
+            </div>
+
+            <div className="bg-white rounded-lg border border-blue-200 overflow-hidden">
+              <table className="w-full">
+                <thead className="bg-blue-100">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-blue-900">Name</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-blue-900">Email</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-blue-900">Role</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-blue-900">Status</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-blue-900">Last Login</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-blue-900">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user, index) => (
+                    <tr key={user.id} className={index % 2 === 0 ? 'bg-white' : 'bg-blue-25'}>
+                      <td className="px-4 py-3 text-sm text-gray-900">{user.name}</td>
+                      <td className="px-4 py-3 text-sm text-gray-900">{user.email}</td>
+                      <td className="px-4 py-3 text-sm">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'
+                        }`}>
+                          {user.role}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
+                          {user.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-900">{user.lastLogin}</td>
+                      <td className="px-4 py-3 text-sm">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => handleToggleUserStatus(user.id)}
+                            className={`px-3 py-1 rounded text-xs ${
+                              user.status === 'active' 
+                                ? 'bg-red-100 text-red-800 hover:bg-red-200' 
+                                : 'bg-green-100 text-green-800 hover:bg-green-200'
+                            }`}
+                          >
+                            {user.status === 'active' ? 'Deactivate' : 'Activate'}
+                          </button>
+                          {user.id !== currentUser.id && (
+                            <button
+                              onClick={() => handleDeleteUser(user.id)}
+                              className="px-3 py-1 rounded text-xs bg-red-100 text-red-800 hover:bg-red-200"
+                            >
+                              Delete
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {showAddUser && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                  <h3 className="text-lg font-bold mb-4">Add New User</h3>
+                  <form onSubmit={handleAddUser} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                      <input
+                        type="text"
+                        value={newUser.name}
+                        onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                      <input
+                        type="email"
+                        value={newUser.email}
+                        onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                      <select
+                        value={newUser.role}
+                        onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      >
+                        <option value="investor">Investor</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                      <div className="flex space-x-2">
+                        <input
+                          type="text"
+                          value={newUser.password}
+                          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={generateRandomPassword}
+                          className="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 text-sm"
+                        >
+                          Generate
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex space-x-3 pt-4">
+                      <button
+                        type="submit"
+                        className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                      >
+                        Add User
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowAddUser(false)}
+                        className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-400"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <nav className="flex space-x-8">
@@ -209,7 +494,6 @@ export default function InvestmentPortal() {
         </div>
       </div>
 
-      {/* Content Area */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         {activeTab === 'documents' && (
           <div className="space-y-6">
@@ -219,7 +503,6 @@ export default function InvestmentPortal() {
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {/* NDA Document */}
               <div className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -252,7 +535,6 @@ export default function InvestmentPortal() {
                 </div>
               </div>
 
-              {/* Offering Memorandum */}
               <div className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -286,21 +568,36 @@ export default function InvestmentPortal() {
               </div>
             </div>
 
-            {/* Next Steps */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-8">
-              <h3 className="text-lg font-semibold text-blue-900 mb-3">Next Steps</h3>
-              <div className="space-y-2 text-sm text-blue-800">
+              <h3 className="text-lg font-semibold text-blue-900 mb-3">Investment Process</h3>
+              <div className="space-y-3 text-sm text-blue-800">
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                  Complete and sign the Non-Disclosure Agreement
+                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="font-medium">Portal Access Granted</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full mr-3"></div>
-                  Review the Offering Memorandum
+                  <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3 text-white font-bold text-xs">1</div>
+                  <span>Review and sign Non-Disclosure Agreement</span>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full mr-3"></div>
-                  Schedule investment consultation call
+                  <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center mr-3 text-gray-600 font-bold text-xs">2</div>
+                  <span>Study the Offering Memorandum</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center mr-3 text-gray-600 font-bold text-xs">3</div>
+                  <span>Complete Subscription Agreement</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center mr-3 text-gray-600 font-bold text-xs">4</div>
+                  <span>Schedule investment consultation call</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center mr-3 text-gray-600 font-bold text-xs">5</div>
+                  <span>Finalize investment and wire transfer</span>
                 </div>
               </div>
             </div>
@@ -315,7 +612,6 @@ export default function InvestmentPortal() {
             </p>
 
             <div className="space-y-4">
-              {/* Q4 2024 Report */}
               <div className="bg-white rounded-xl border border-gray-200 p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -338,7 +634,6 @@ export default function InvestmentPortal() {
                 </div>
               </div>
 
-              {/* Q1 2025 Report */}
               <div className="bg-white rounded-xl border border-gray-200 p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -361,7 +656,6 @@ export default function InvestmentPortal() {
                 </div>
               </div>
 
-              {/* Upcoming Report */}
               <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -370,7 +664,7 @@ export default function InvestmentPortal() {
                       Construction commencement and progress updates
                     </p>
                     <div className="mt-2 text-xs text-gray-400">
-                      Expected: June 30, 2025
+                      Expected: September 30, 2025
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 font-medium">
@@ -380,25 +674,30 @@ export default function InvestmentPortal() {
               </div>
             </div>
 
-            {/* Contact for Questions */}
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mt-8">
               <h3 className="text-lg font-semibold text-yellow-900 mb-3">Questions About Reports?</h3>
               <p className="text-yellow-800 text-sm mb-4">
                 Contact our team for clarification on any project updates or financial information.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                 <a 
-                  href="mailto:manager@merritthouse.net"
-                  className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium"
+                  href="mailto:lance.nading@c3hdenver.com"
+                  className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium text-center"
                 >
-                  Email Manager
+                  Email Lance Nading
                 </a>
                 <a 
-                  href="tel:303-359-8337"
-                  className="bg-white text-yellow-600 border border-yellow-600 px-4 py-2 rounded-lg hover:bg-yellow-50 transition-colors text-sm font-medium"
+                  href="tel:720-359-8337"
+                  className="bg-white text-yellow-600 border border-yellow-600 px-4 py-2 rounded-lg hover:bg-yellow-50 transition-colors text-sm font-medium text-center"
                 >
-                  Call 303-359-8337
+                  Call 720-359-8337
                 </a>
+                <button
+                  onClick={() => window.open('https://calendly.com/c3hdenver', '_blank')}
+                  className="bg-yellow-100 text-yellow-800 border border-yellow-300 px-4 py-2 rounded-lg hover:bg-yellow-200 transition-colors text-sm font-medium"
+                >
+                  Schedule Meeting
+                </button>
               </div>
             </div>
           </div>
