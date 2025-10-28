@@ -44,10 +44,10 @@ export default function Navbar() {
                   Financials
                 </a>
                 <a 
-                  href="#investment" 
+                  href="#contact" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
-                  Investment
+                  Contact
                 </a>
               </>
             ) : (
@@ -71,28 +71,22 @@ export default function Navbar() {
                   Financials
                 </Link>
                 <Link 
-                  href="/#investment" 
+                  href="/#contact" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
-                  Investment
+                  Contact
                 </Link>
               </>
             )}
-            <Link 
-              href="/investor" 
-              className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-            >
-              Investor Portal
-            </Link>
           </div>
           
           {/* Contact Button & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <a 
-              href="tel:720-359-8337"
+              href="/investor"
               className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium"
             >
-              Contact
+              Investor Portal
             </a>
             
             {/* Mobile Menu Button */}

@@ -2,22 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
-const HERO_IMAGES = [
-  { src: '/images/hero/liv1403-exterior.jpg', alt: 'Liv 1403 Luxury Development Exterior' },
-  { src: '/images/hero/rooftop-view.jpg', alt: 'Rooftop Deck with Denver Skyline Views' },
-  { src: '/images/hero/interior-luxury.jpg', alt: 'Luxury Interior Living Space' },
-];
-
 export default function Home() {
-  const [current, setCurrent] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     setIsVisible(true);
@@ -27,19 +13,14 @@ export default function Home() {
     <main className="bg-gray-50">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
-        {/* Background Image Carousel */}
+        {/* Single Background Image */}
         <div className="absolute inset-0 z-0">
-          {HERO_IMAGES.map((image, idx) => (
-            <div
-              key={idx}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                idx === current ? 'opacity-30' : 'opacity-0'
-              }`}
-            >
-              <div className="w-full h-full bg-gradient-to-r from-gray-900/80 to-gray-800/60" />
-              <div className="w-full h-full bg-gray-600" />
-            </div>
-          ))}
+          <img 
+            src="/images/hero.png" 
+            alt="Liv 1403 Luxury Development Exterior"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-800/60" />
         </div>
 
         {/* Hero Content */}
@@ -86,22 +67,6 @@ export default function Home() {
                 Investor Portal
               </a>
             </div>
-          </div>
-        </div>
-
-        {/* Carousel Navigation */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="flex space-x-3">
-            {HERO_IMAGES.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrent(idx)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  idx === current ? 'bg-white scale-110' : 'bg-white/40 hover:bg-white/60'
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
           </div>
         </div>
       </section>
@@ -261,9 +226,11 @@ export default function Home() {
           
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <div className="bg-gray-200 h-64 sm:h-80 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Lance Nading Photo</span>
-              </div>
+              <img 
+                src="/images/about.png"
+                alt="Lance Nading, Principal & Owner, C3H Development"
+                className="w-full h-64 sm:h-80 rounded-xl object-cover"
+              />
             </div>
             
             <div className="order-1 lg:order-2">
@@ -344,12 +311,16 @@ export default function Home() {
             </div>
             
             <div className="space-y-4 order-first lg:order-last">
-              <div className="bg-gray-200 h-48 sm:h-64 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Luxury Interior Rendering</span>
-              </div>
-              <div className="bg-gray-200 h-36 sm:h-48 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Kitchen & Living Space</span>
-              </div>
+              <img 
+                src="/images/market.jpg"
+                alt="Luxury Interior Living Space"
+                className="w-full h-48 sm:h-64 rounded-xl object-cover"
+              />
+              <img 
+                src="/images/sign.webp"
+                alt="Historic Old South Pearl Street"
+                className="w-full h-36 sm:h-48 rounded-xl object-cover"
+              />
             </div>
           </div>
         </div>
@@ -408,9 +379,11 @@ export default function Home() {
             <div>
               <div className="bg-white p-4 sm:p-6 rounded-xl h-full border border-gray-200">
                 <h4 className="font-semibold mb-4">Location Map</h4>
-                <div className="bg-gray-200 h-60 sm:h-80 rounded-lg flex items-center justify-center">
-                  <span className="text-gray-500 text-sm sm:text-base">Interactive Map Coming Soon</span>
-                </div>
+                <img 
+                  src="/images/map.jpg"
+                  alt="Liv 1403 Location Map - 1403 S. Pearl Street, Denver"
+                  className="w-full h-60 sm:h-80 rounded-lg object-cover"
+                />
                 <div className="mt-4 text-sm text-gray-600">
                   <div className="font-medium">1403 S. Pearl Street</div>
                   <div>Denver, Colorado 80210</div>
