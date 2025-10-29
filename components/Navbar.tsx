@@ -83,10 +83,16 @@ export default function Navbar() {
           {/* Contact Button & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <a 
+              href="/buyer"
+              className="bg-white text-yellow-600 border-2 border-yellow-600 px-6 py-2 rounded-lg hover:bg-yellow-50 transition-colors font-medium hidden lg:block"
+            >
+              Buyer Portal
+            </a>
+            <a 
               href="/investor"
               className="bg-yellow-600 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 transition-colors font-medium"
             >
-              Investor Portal
+              Investor Login
             </a>
             
             {/* Mobile Menu Button */}
@@ -189,11 +195,18 @@ export default function Navbar() {
                 </>
               )}
               <Link
+                href="/buyer"
+                className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Buyer Portal
+              </Link>
+              <Link
                 href="/investor"
                 className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Investor Portal
+                Investor Login
               </Link>
             </div>
           </div>
