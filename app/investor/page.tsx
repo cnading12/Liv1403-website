@@ -299,10 +299,10 @@ export default function InvestmentPortal() {
                 <h4 className="font-semibold text-white mb-3 text-sm">Required Agreement - Confidential Investment Information</h4>
                 <div className="max-h-32 overflow-y-auto text-xs text-gray-300 leading-relaxed mb-3 space-y-2">
                   <p>
-                    <strong>Confidentiality:</strong> By accessing this portal, you agree the information is confidential and will not be disclosed to any other person without prior written consent.
+                    <strong>Confidentiality:</strong> By accepting delivery of this investment presentation, you agree the information contained in the investment presentation is confidential, and you agree not to reproduce, disclose, or distribute to any other person, in whole or in part, the contents of this investment presentation, unless the Company provides its prior written consent.
                   </p>
                   <p>
-                    <strong>Investment Risk:</strong> All investments are high risk and you could lose your entire investment. No returns are guaranteed.
+                    <strong>Investment Risk:</strong> All investments in the Company are speculative, illiquid, and subject to restrictions on transfer. There is no assurance that the Company will achieve any targeted investment returns, or any returns at all. Investors in the Company could lose their entire investment.
                   </p>
                 </div>
                 <label className="flex items-start space-x-3">
@@ -608,27 +608,27 @@ export default function InvestmentPortal() {
               {/* Key Metrics Grid */}
               <div className="grid md:grid-cols-4 gap-6 mb-8">
                 <div className="bg-white rounded-xl border border-gray-200 p-6">
-                  <div className="text-sm text-gray-600 mb-2">Total Project Cost</div>
+                  <div className="text-sm text-gray-600 mb-2">Projected Total Cost</div>
                   <div className="text-3xl font-bold text-gray-900">$6.2M</div>
                   <div className="text-xs text-gray-500 mt-2">75% Debt | 25% Equity</div>
                 </div>
                 
                 <div className="bg-white rounded-xl border border-gray-200 p-6">
-                  <div className="text-sm text-gray-600 mb-2">Projected Value</div>
+                  <div className="text-sm text-gray-600 mb-2">Projected Finished Value</div>
                   <div className="text-3xl font-bold text-green-600">$8.2M</div>
                   <div className="text-xs text-gray-500 mt-2">At completion</div>
                 </div>
                 
                 <div className="bg-white rounded-xl border border-gray-200 p-6">
-                  <div className="text-sm text-gray-600 mb-2">Target IRR</div>
+                  <div className="text-sm text-gray-600 mb-2">Estimated Project IRR</div>
                   <div className="text-3xl font-bold text-yellow-600">39.48%</div>
                   <div className="text-xs text-gray-500 mt-2">Annual return</div>
                 </div>
                 
                 <div className="bg-white rounded-xl border border-gray-200 p-6">
-                  <div className="text-sm text-gray-600 mb-2">Equity Multiple</div>
+                  <div className="text-sm text-gray-600 mb-2">Estimated Project MOIC</div>
                   <div className="text-3xl font-bold text-blue-600">1.32x</div>
-                  <div className="text-xs text-gray-500 mt-2">MOIC</div>
+                  <div className="text-xs text-gray-500 mt-2">Equity multiple</div>
                 </div>
               </div>
 
@@ -638,7 +638,7 @@ export default function InvestmentPortal() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className="text-gray-700">Equity Capital</span>
+                      <span className="text-gray-700">Equity Capital Contributions</span>
                       <span className="font-semibold text-gray-900">$1,600,000</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-3">
@@ -647,11 +647,11 @@ export default function InvestmentPortal() {
                     <div className="text-xs text-gray-500 mt-1">25% of total cost</div>
                     <div className="mt-4 space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Members (90%):</span>
+                        <span className="text-gray-600">Members' Capital Contribution (90%):</span>
                         <span className="font-medium">$1,440,000</span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Manager (10%):</span>
+                        <span className="text-gray-600">Manager's Capital Contribution (10%):</span>
                         <span className="font-medium">$160,000</span>
                       </div>
                     </div>
@@ -659,20 +659,24 @@ export default function InvestmentPortal() {
                   
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className="text-gray-700">Debt Financing</span>
+                      <span className="text-gray-700">Debt Financing (75% LTC)</span>
                       <span className="font-semibold text-gray-900">$4,600,000</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-3">
                       <div className="bg-green-600 h-3 rounded-full" style={{ width: '75%' }}></div>
                     </div>
-                    <div className="text-xs text-gray-500 mt-1">75% LTC</div>
+                    <div className="text-xs text-gray-500 mt-1">75% loan-to-cost</div>
                   </div>
                 </div>
                 
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-medium">Minimum Investment</span>
+                    <span className="text-gray-700 font-medium">Minimum Member Investment</span>
                     <span className="text-2xl font-bold text-gray-900">$150,000</span>
+                  </div>
+                  <div className="flex justify-between items-center mt-2">
+                    <span className="text-gray-700 font-medium">Target Investment Period</span>
+                    <span className="text-xl font-bold text-gray-900">18 Months</span>
                   </div>
                 </div>
               </div>
@@ -686,7 +690,7 @@ export default function InvestmentPortal() {
                       <div>
                         <div className="font-semibold text-gray-900">Tier 1: Return of Capital</div>
                         <div className="text-sm text-gray-600 mt-1">
-                          90% to Members | 10% to Manager until each receives back initial capital
+                          90% of distributions are made to the Members and 10% to the Manager, until each receives back their initial contributed capital
                         </div>
                       </div>
                       <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">90/10</span>
@@ -696,9 +700,9 @@ export default function InvestmentPortal() {
                   <div className="border-l-4 border-green-600 pl-4">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <div className="font-semibold text-gray-900">Tier 2: Initial Preferred Return (10%)</div>
+                        <div className="font-semibold text-gray-900">Tier 2: Initial Preferred Return 10%</div>
                         <div className="text-sm text-gray-600 mt-1">
-                          90% to Members | 10% to Manager until 10% annual return achieved
+                          90% of distributions are made to the Members and 10% to the Manager, until each receives a 10% aggregate annual return on their contributed funds
                         </div>
                       </div>
                       <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">90/10</span>
@@ -708,9 +712,9 @@ export default function InvestmentPortal() {
                   <div className="border-l-4 border-yellow-600 pl-4">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <div className="font-semibold text-gray-900">Tier 3: Cumulative Preferred Return (15%)</div>
+                        <div className="font-semibold text-gray-900">Tier 3: Cumulative Preferred Return 15%</div>
                         <div className="text-sm text-gray-600 mt-1">
-                          70% to Members | 30% to Manager until 15% annual return achieved
+                          70% of subsequent distributions are made to the Members and 30% to the Manager, until the Members receive a 15% annual return on their contributed funds
                         </div>
                       </div>
                       <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">70/30</span>
@@ -720,9 +724,9 @@ export default function InvestmentPortal() {
                   <div className="border-l-4 border-purple-600 pl-4">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <div className="font-semibold text-gray-900">Tier 4: Residual Split (&gt;15%)</div>
+                        <div className="font-semibold text-gray-900">Tier 4: Cumulative Preferred Return &gt;15%</div>
                         <div className="text-sm text-gray-600 mt-1">
-                          60% to Members | 40% to Manager on all additional distributions
+                          Thereafter, any additional distributions are made 60% to the Members and 40% to the Manager
                         </div>
                       </div>
                       <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">60/40</span>
@@ -734,7 +738,7 @@ export default function InvestmentPortal() {
 
             {/* Project Timeline */}
             <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Project Timeline</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Estimated Timeline</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="w-32 text-sm text-gray-600">Months 1-14</div>
@@ -746,34 +750,36 @@ export default function InvestmentPortal() {
                 <div className="flex items-center">
                   <div className="w-32 text-sm text-gray-600">Months 3-14</div>
                   <div className="flex-1 ml-24 bg-green-600 rounded-full h-8 flex items-center px-4 text-white text-sm font-medium">
-                    Pre-Sales Period
+                    Presales start
                   </div>
                 </div>
                 
                 <div className="flex items-center">
                   <div className="w-32 text-sm text-gray-600">Months 14-16</div>
                   <div className="flex-1 ml-48 bg-yellow-600 rounded-full h-8 flex items-center px-4 text-white text-sm font-medium">
-                    Pre-Sales Closing
+                    Presales closing
                   </div>
                 </div>
                 
                 <div className="flex items-center">
                   <div className="w-32 text-sm text-gray-600">Months 16-18</div>
                   <div className="flex-1 ml-56 bg-purple-600 rounded-full h-8 flex items-center px-4 text-white text-sm font-medium">
-                    Remaining Sales & Final Close
+                    Remaining Sales closing
                   </div>
                 </div>
               </div>
               
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-700 font-medium">Target Investment Period</span>
-                  <span className="text-xl font-bold text-gray-900">18 Months</span>
+                  <span className="text-gray-700 font-medium">Targeted Completion</span>
+                  <span className="text-xl font-bold text-gray-900">5/15/2027</span>
                 </div>
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-gray-700 font-medium">Target Completion Date</span>
-                  <span className="text-xl font-bold text-gray-900">May 15, 2027</span>
-                </div>
+              </div>
+              
+              <div className="mt-6 pt-6 border-t border-gray-200 bg-yellow-50 rounded-lg p-4">
+                <p className="text-sm text-gray-700">
+                  <strong>Important:</strong> All future dates and anticipated milestones are estimates only. Actual timing may materially differ. Please see the "Disclosures" provided on p. 14 of the Investment Presentation. The Company does not guarantee any future performance, results, or timeframes.
+                </p>
               </div>
             </div>
           </div>
@@ -785,35 +791,35 @@ export default function InvestmentPortal() {
             
             {/* Project Budget */}
             <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Project Budget</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Projected Budget</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Cost Category</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">Cost Summary</th>
                       <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Total</th>
                       <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Per Unit</th>
-                      <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">Per SF (Gross)</th>
+                      <th className="px-4 py-3 text-right text-sm font-semibold text-gray-700">$/Gross Sq. Ft.</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     <tr>
                       <td className="px-4 py-3 text-sm text-gray-900">Land Cost</td>
-                      <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">$1,750,000</td>
+                      <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">$1.75M</td>
                       <td className="px-4 py-3 text-sm text-right text-gray-600">$250,000</td>
                       <td className="px-4 py-3 text-sm text-right text-gray-600">$193.20</td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-sm text-gray-900">Hard Costs</td>
-                      <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">$3,600,000</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-600">$514,286</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-600">$397.44</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-3 text-sm text-gray-900">Soft Costs</td>
                       <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">$450,000</td>
                       <td className="px-4 py-3 text-sm text-right text-gray-600">$64,971</td>
                       <td className="px-4 py-3 text-sm text-right text-gray-600">$50.21</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 text-sm text-gray-900">Hard Costs</td>
+                      <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">$3.6M</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-600">$514,286</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-600">$397.44</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-3 text-sm text-gray-900">Interest Reserve + Loan Fees</td>
@@ -828,97 +834,129 @@ export default function InvestmentPortal() {
                       <td className="px-4 py-3 text-sm text-right text-gray-600">$17.66</td>
                     </tr>
                     <tr className="bg-yellow-50 font-semibold">
-                      <td className="px-4 py-3 text-sm text-gray-900">Total Project Cost</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-900">$6,200,000</td>
+                      <td className="px-4 py-3 text-sm text-gray-900">Projected Total Cost</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-900">$6.2M</td>
                       <td className="px-4 py-3 text-sm text-right text-gray-900">$885,325</td>
                       <td className="px-4 py-3 text-sm text-right text-gray-900">$684.18</td>
                     </tr>
                     <tr className="bg-green-50 font-semibold">
                       <td className="px-4 py-3 text-sm text-gray-900">Projected Finished Value</td>
-                      <td className="px-4 py-3 text-sm text-right text-green-700">$8,200,000</td>
+                      <td className="px-4 py-3 text-sm text-right text-green-700">$8.2M</td>
                       <td className="px-4 py-3 text-sm text-right text-green-700">$1,366,667</td>
                       <td className="px-4 py-3 text-sm text-right text-green-700">$905.99</td>
                     </tr>
                     <tr className="bg-blue-50 font-bold">
-                      <td className="px-4 py-3 text-sm text-gray-900">Projected Profit</td>
-                      <td className="px-4 py-3 text-sm text-right text-blue-700">$2,000,000</td>
-                      <td className="px-4 py-3 text-sm text-right text-blue-700">$481,342</td>
-                      <td className="px-4 py-3 text-sm text-right text-blue-700">$221.81</td>
+                      <td className="px-4 py-3 text-sm text-gray-900">Targeted Profit</td>
+                      <td className="px-4 py-3 text-sm text-right text-blue-700">$2M</td>
+                      <td className="px-4 py-3 text-sm text-right text-blue-700">$333,333</td>
+                      <td className="px-4 py-3 text-sm text-right text-blue-700">$192.77</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              
+              <div className="mt-6 pt-6 border-t border-gray-200 bg-yellow-50 rounded-lg p-4">
+                <p className="text-sm text-gray-700">
+                  <strong>Important:</strong> All budgeted amounts are estimates only and may materially differ in practice. Many construction costs are outside of the Company's control. Please see the "Disclosures" provided on p. 14. Changes in budgeted costs may materially and negatively impact investor returns.
+                </p>
+              </div>
             </div>
 
-            {/* Market Comparable Analysis */}
+            {/* Existing Multi-Family Apartments */}
             <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Market Comparable Analysis</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Existing Multi-Family Apartments</h3>
               <p className="text-gray-600 mb-4">
-                Three new luxury apartment buildings on Old South Pearl Street provide strong market validation:
+                Currently, there are three new luxury apartment buildings on Old South Pearl St, located at:
               </p>
               <div className="space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <div className="font-semibold text-gray-900 mb-2">1411 S. Pearl St.</div>
-                  <div className="text-sm text-gray-600">
-                    Rental rates: $3.90 - $5.00 PSF/month • Low vacancy • Wait list for tenancy
-                  </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Market value at 5% cap rate exceeds Liv1403 targeted price PSF
-                  </div>
-                </div>
-                
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <div className="font-semibold text-gray-900 mb-2">1745 S. Pearl St.</div>
-                  <div className="text-sm text-gray-600">
-                    Developed by Lance Nading (2021) • Rental rates: $3.90 - $5.00 PSF/month
-                  </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Low vacancy • Proven developer experience in this exact submarket
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <a 
+                    href="https://www.1411southpearl.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-600 hover:text-blue-700 mb-2 inline-flex items-center"
+                  >
+                    1411 S. Pearl St.
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                  <div className="text-sm text-gray-600 mt-2">
+                    Market rental rates between $3.90 - $5.00 PSF per month • Extremely low vacancy and often times have wait lists to be approved for tenancy
                   </div>
                 </div>
                 
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <div className="font-semibold text-gray-900 mb-2">1775 S. Pearl St.</div>
-                  <div className="text-sm text-gray-600">
-                    Rental rates: $3.90 - $5.00 PSF/month • Extremely low vacancy
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <a 
+                    href="https://1745southpearl.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-600 hover:text-blue-700 mb-2 inline-flex items-center"
+                  >
+                    1745 S. Pearl St.
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                  <div className="text-sm text-gray-600 mt-2">
+                    Constructed by Lance Nading (Principal of Liv1403) in 2021 • Market rental rates between $3.90 - $5.00 PSF per month • Extremely low vacancy and often times have wait lists to be approved for tenancy
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Consistent demand validates market strength
+                </div>
+                
+                <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
+                  <a 
+                    href="https://cornerstoneapartments.com/our-buildings/1775-s-pearl/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-semibold text-blue-600 hover:text-blue-700 mb-2 inline-flex items-center"
+                  >
+                    1775 S. Pearl St.
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                  <div className="text-sm text-gray-600 mt-2">
+                    Market rental rates between $3.90 - $5.00 PSF per month • Extremely low vacancy and often times have wait lists to be approved for tenancy
                   </div>
                 </div>
               </div>
               
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <div className="font-semibold text-blue-900 mb-2">Key Market Insight</div>
+                <div className="font-semibold text-blue-900 mb-2">Market Value Analysis</div>
                 <div className="text-sm text-blue-800">
-                  Liv1403 will be the <strong>first for-sale luxury condominiums</strong> in the Old South Pearl submarket, 
-                  offering a unique investment opportunity with no direct competition for ownership units.
+                  Each of the above apartment buildings' market value at a 5% cap rate calculated on their net rental income exceeds the targeted market per square foot sale price value for Liv1403.
+                </div>
+              </div>
+              
+              <div className="mt-4 p-4 bg-green-50 rounded-lg">
+                <div className="font-semibold text-green-900 mb-2">First to Market For-Sale Condos</div>
+                <div className="text-sm text-green-800">
+                  Liv1403 will be first to market in the Old South Pearl St. submarket, offering the only for-sale exclusive high end luxury condominium purchase opportunity.
                 </div>
               </div>
             </div>
 
-            {/* Sensitivity Analysis */}
+            {/* Recent Experience */}
             <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Value Assumptions</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Experience</h3>
+              <div className="space-y-4">
+                <p className="text-gray-700">
+                  The Principal, Lance Nading, previously completed 1745 S. Pearl St. an apartment building on Old South Pearl Street, and is deeply familiar with the neighborhood, community, and real estate values.
+                </p>
+              </div>
+            </div>
+
+            {/* Condominium Value */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Liv1403 Condominium Value</h3>
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-gray-700">Target Sale Price Range</span>
-                    <span className="font-semibold text-gray-900">$850 - $950+ per SF</span>
+                    <span className="text-gray-700">Anticipated Finished Market Value</span>
+                    <span className="font-semibold text-gray-900">$850 - $950+ per square foot</span>
                   </div>
                   <p className="text-sm text-gray-600">
-                    Based on prime corner location, cutting-edge design, superior construction quality, 
-                    luxury finishes, and state-of-the-art technology in every unit.
-                  </p>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-gray-700">Unit Mix</span>
-                    <span className="font-semibold text-gray-900">6 Residential Units</span>
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    8,576 SF residential + 4,638 SF private rooftop decks + 482 SF retail
+                    Liv1403 condominiums are uniquely located, with cutting edge design, superior construction quality. Finished market value is anticipated to be between $850-$950+ per square foot. Additionally, Liv1403 will provide the best in high end luxury finishes and state of the art technology in every unit.
                   </p>
                 </div>
               </div>
@@ -926,39 +964,21 @@ export default function InvestmentPortal() {
 
             {/* Risk Factors */}
             <div className="bg-red-50 border border-red-200 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-red-900 mb-4">Investment Risk Factors</h3>
-              <ul className="space-y-2 text-sm text-red-800">
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <span><strong>Construction Risk:</strong> Delays, cost overruns, or unforeseen site conditions could impact timeline and budget.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <span><strong>Market Risk:</strong> Changes in Denver real estate market conditions could affect sale prices and absorption rates.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <span><strong>Financing Risk:</strong> Interest rate changes or availability of construction financing could impact project economics.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <span><strong>Illiquidity:</strong> This is an illiquid investment with no guarantee of distributions or timeline for exit.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  <span><strong>Loss of Capital:</strong> You could lose your entire investment. No returns are guaranteed.</span>
-                </li>
-              </ul>
+              <h3 className="text-xl font-bold text-red-900 mb-4">Investment Risk Disclosure</h3>
+              <div className="space-y-3 text-sm text-red-800">
+                <p><strong>Important:</strong> Target returns are estimates. Any actual returns may materially differ. Please see the "Disclosures" provided on p. 14. Investing in the Company is high risk, and you could lose all your investment. The Company does not guarantee any returns.</p>
+                
+                <p className="mt-4"><strong>Key Risk Factors:</strong></p>
+                <ul className="space-y-2 ml-4 list-disc">
+                  <li>All investments in the Company are speculative, illiquid, and subject to restrictions on transfer</li>
+                  <li>There is no assurance that the Company will achieve any targeted investment returns, or any returns at all</li>
+                  <li>Investors in the Company could lose their entire investment</li>
+                  <li>No secondary market exists for interests in the Company, and none is expected to develop</li>
+                  <li>Construction delays, cost overruns, or unforeseen conditions could impact timeline and budget</li>
+                  <li>Changes in market conditions could affect sale prices and absorption rates</li>
+                  <li>Interest rate changes or availability of financing could impact project economics</li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
@@ -980,10 +1000,10 @@ export default function InvestmentPortal() {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      Investment Presentation
+                      Confidential Investment Presentation
                     </h3>
                     <p className="text-gray-600 text-sm mb-4">
-                      Complete investor presentation with financial projections, market analysis, and project details.
+                      Accredited Investors Only - Complete investor presentation with financial projections, market analysis, and project details.
                     </p>
                     <div className="space-y-2">
                       <a 
@@ -1083,7 +1103,7 @@ export default function InvestmentPortal() {
                       Building Permit
                     </h3>
                     <p className="text-gray-600 text-sm mb-4">
-                      Approved City of Denver commercial construction permit - project is shovel ready.
+                      Approved City of Denver commercial construction permit - Liv1403 construction permits have been approved and the project is shovel ready.
                     </p>
                     <div className="space-y-2">
                       <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
@@ -1114,10 +1134,10 @@ export default function InvestmentPortal() {
                   Email Lance Nading
                 </a>
                 <a 
-                  href="tel:720-359-8337"
+                  href="tel:+1-303-359-8337"
                   className="bg-white text-yellow-600 border border-yellow-600 px-4 py-2 rounded-lg hover:bg-yellow-50 transition-colors text-sm font-medium text-center"
                 >
-                  Call 720-359-8337
+                  Call +1 (303) 359-8337
                 </a>
               </div>
             </div>
@@ -1135,7 +1155,7 @@ export default function InvestmentPortal() {
               <div className="bg-white rounded-xl border border-gray-200 p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Current Status - Pre-Construction Phase</h3>
+                    <h3 className="text-lg font-semibold text-gray-900">Current Status - Shovel Ready</h3>
                     <p className="text-sm text-gray-500 mt-1">Updated: October 29, 2025</p>
                   </div>
                   <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
@@ -1144,67 +1164,17 @@ export default function InvestmentPortal() {
                 </div>
                 <div className="space-y-3 text-gray-700">
                   <p>
-                    ✓ <strong>Building permits approved</strong> - Commercial construction permit issued by City of Denver
+                    ✓ <strong>Permit Status:</strong> Liv1403 construction permits have been approved and the project is shovel ready
                   </p>
                   <p>
-                    ✓ <strong>Financing secured</strong> - Construction loan commitment in place
+                    ✓ <strong>Financing secured:</strong> Construction loan commitment in place (75% LTC)
                   </p>
                   <p>
-                    ⏳ <strong>Equity raising</strong> - Currently accepting qualified investor commitments
+                    ⏳ <strong>Equity raising:</strong> Currently accepting qualified investor commitments ($150,000 minimum)
                   </p>
                   <p>
-                    📅 <strong>Groundbreaking targeted</strong> - Q1 2026 upon full equity commitment
+                    📅 <strong>Groundbreaking targeted:</strong> Upon full equity commitment
                   </p>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">Upcoming Milestones</h3>
-                    <p className="text-sm text-gray-500 mt-1">Expected timeline based on current projections</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-24 text-sm text-gray-600">Q4 2025</div>
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">Complete Equity Raise</div>
-                      <div className="text-sm text-gray-600 mt-1">Finalize investor commitments and close funding round</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-24 text-sm text-gray-600">Q1 2026</div>
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">Construction Commencement</div>
-                      <div className="text-sm text-gray-600 mt-1">Site preparation and foundation work begins</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-24 text-sm text-gray-600">Q2 2026</div>
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">Pre-Sales Launch</div>
-                      <div className="text-sm text-gray-600 mt-1">Begin marketing and pre-selling condominium units</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-24 text-sm text-gray-600">Q2 2027</div>
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">Construction Completion</div>
-                      <div className="text-sm text-gray-600 mt-1">Target completion date: May 15, 2027</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-24 text-sm text-gray-600">Q3 2027</div>
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">Final Closings & Distributions</div>
-                      <div className="text-sm text-gray-600 mt-1">Complete unit sales and distribute investor returns</div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -1214,10 +1184,9 @@ export default function InvestmentPortal() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div>
-                    <h4 className="font-semibold text-green-900 mb-2">Market Update: Trader Joe's Confirmed</h4>
+                    <h4 className="font-semibold text-green-900 mb-2">Coming Soon: Trader Joe's</h4>
                     <p className="text-green-800 text-sm">
-                      Exciting news: Trader Joe's has confirmed their new location will open in 2026, just one block from Liv 1403. 
-                      This significant retail addition is expected to increase foot traffic and property values in the immediate area.
+                      Exciting news for future residents of Liv1403: in 2026, a brand-new Trader Joe's is scheduled to open just one block away. With its affordable organic options, specialty items, and neighborhood-friendly vibe, having Trader Joe's within walking distance adds everyday convenience and enhances the vibrant lifestyle of this sought-after Pearl Street location.
                     </p>
                   </div>
                 </div>
