@@ -652,6 +652,129 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Corner Lot Advantage - NEW SECTION */}
+<section id="corner-lot" className="py-12 sm:py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+        Corner Lot Advantage
+      </h2>
+      <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+        Prime corner location with enhanced visibility and buildable square footage
+      </p>
+    </div>
+    
+    {/* Feature Images Grid */}
+    <div className="grid md:grid-cols-2 gap-6 mb-12">
+      {/* Corner Location Map */}
+      <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
+        <Image 
+          src="/images/corner.jpg" 
+          alt="Corner Lot Location - Aerial View"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+          <p className="text-white text-sm font-medium">Corner Lot Location - S Pearl St & E Arkansas Ave</p>
+        </div>
+      </div>
+      
+      {/* Artist Rendering */}
+      <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
+        <Image 
+          src="/images/hero.png" 
+          alt="1403 S. Pearl St. - Artist Rendering"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+          <p className="text-white text-sm font-medium">1403 S. Pearl St. - Artist Rendering</p>
+        </div>
+      </div>
+    </div>
+    
+    {/* Benefits Grid */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+      <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+          <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-bold mb-3 text-gray-900">Higher Visibility</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">
+          Corner lots' higher visibility can lead to higher marketability and increased overall value
+        </p>
+      </div>
+      
+      <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+          <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-bold mb-3 text-gray-900">Better Access</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">
+          Corner lots are accessible from multiple convenient locations instead of only a main door front entrance
+        </p>
+      </div>
+      
+      <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+          <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-bold mb-3 text-gray-900">More Sq Footage</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">
+          Because one of the sides of any corner lot does not have another structure within 10 feet of it, the builder is allowed to build up to the property line and is not required to provide a 10 foot separation between building structures, thus significantly increasing the overall buildable square footage of the corner lot
+        </p>
+      </div>
+      
+      <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+          <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-bold mb-3 text-gray-900">Curb Appeal</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">
+          Corner lots enjoy significantly increased natural light, better ventilation, enhanced curb appeal, and more flexibility for design options
+        </p>
+      </div>
+      
+      <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+          <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+          </svg>
+        </div>
+        <h3 className="text-lg font-bold mb-3 text-gray-900">Views</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">
+          Residents will enjoy unobstructed views of the surrounding Platt Park neighborhood
+        </p>
+      </div>
+    </div>
+    
+    {/* Denver Skyline Feature Image */}
+    <div className="relative h-96 sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+      <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-pink-500/30 mix-blend-overlay z-10" />
+      <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600 text-lg">
+        Denver Skyline with Mountain Views
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-8 z-20 bg-gradient-to-t from-black/80 to-transparent">
+        <p className="text-white text-lg sm:text-xl font-semibold mb-2">
+          Unobstructed Views
+        </p>
+        <p className="text-white/90 text-sm">
+          Expansive views from the Denver skyline to the Rocky Mountains
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
       {/* Location & Neighborhood */}
       <section id="location" className="py-12 sm:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
