@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const HERO_IMAGES = [
   { src: '/images/hero.png', alt: 'Liv 1403 Luxury Development Exterior' },
@@ -37,10 +38,12 @@ export default function Home() {
               }`}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-800/60 z-10" />
-              <img 
+              <Image 
                 src={image.src} 
                 alt={image.alt}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority={idx === 0}
               />
             </div>
           ))}
@@ -172,11 +175,21 @@ export default function Home() {
             </div>
             
             <div className="space-y-4 order-first lg:order-last">
-              <div className="bg-gray-200 h-48 sm:h-64 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Luxury Interior Rendering</span>
+              <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden">
+                <Image 
+                  src="/images/about.png" 
+                  alt="Luxury Condominium Interior"
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="bg-gray-200 h-36 sm:h-48 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Kitchen & Living Space</span>
+              <div className="relative h-36 sm:h-48 rounded-xl overflow-hidden">
+                <Image 
+                  src="/images/sign.webp" 
+                  alt="Old South Pearl Street Sign"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -283,11 +296,21 @@ export default function Home() {
             </div>
             
             <div className="space-y-4 order-first lg:order-last">
-              <div className="bg-gray-200 h-48 sm:h-64 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Luxury Interior Rendering</span>
+              <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden">
+                <Image 
+                  src="/images/hero.png" 
+                  alt="Luxury Exterior Design"
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="bg-gray-200 h-36 sm:h-48 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Kitchen & Living Space</span>
+              <div className="relative h-36 sm:h-48 rounded-xl overflow-hidden">
+                <Image 
+                  src="/images/market.jpg" 
+                  alt="Kitchen & Living Space"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -342,8 +365,13 @@ export default function Home() {
             <div>
               <div className="bg-white p-4 sm:p-6 rounded-xl h-full border border-gray-200">
                 <h4 className="font-semibold mb-4">Location Map</h4>
-                <div className="bg-gray-200 h-60 sm:h-80 rounded-lg flex items-center justify-center">
-                  <span className="text-gray-500 text-sm sm:text-base">Interactive Map Coming Soon</span>
+                <div className="relative h-60 sm:h-80 rounded-lg overflow-hidden">
+                  <Image 
+                    src="/images/map.jpg" 
+                    alt="1403 S Pearl Street Location Map"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <div className="mt-4 text-sm text-gray-600">
                   <div className="font-medium">1403 S. Pearl Street</div>
@@ -370,8 +398,10 @@ export default function Home() {
           
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <div className="bg-gray-200 h-64 sm:h-80 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm sm:text-base">Lance Nading Photo</span>
+              <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden bg-gray-200">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-500 text-sm sm:text-base">
+                  Lance Nading Photo
+                </div>
               </div>
             </div>
             
@@ -523,7 +553,7 @@ export default function Home() {
 }
 
 // Component definitions
-function FeatureItem({ title, description }) {
+function FeatureItem({ title, description }: { title: string; description: string }) {
   return (
     <div className="flex items-start space-x-3">
       <div className="w-2 h-2 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
