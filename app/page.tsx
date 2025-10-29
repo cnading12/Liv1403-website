@@ -333,397 +333,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Design Highlights */}
-      <section id="design" className="py-12 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              Design Highlights
-            </h2>
-          </div>
-          
-          {/* Image Gallery */}
-          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-12">
-            <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
-              <Image 
-                src="/images/about.png" 
-                alt="Previous Multi-family Project - Highlands, Denver"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-white text-xs font-medium">Previous Multi-family Project - Highlands, Denver</p>
-              </div>
-            </div>
-            <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
-              <Image 
-                src="/images/market.jpg" 
-                alt="Previous Project - Cherry Creek, Denver"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-white text-xs font-medium">Previous Project - Cherry Creek, Denver</p>
-              </div>
-            </div>
-            <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
-              <Image 
-                src="/images/hero.png" 
-                alt="Previous Multi-family Project - Sloans Lake, Denver"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-white text-xs font-medium">Previous Multi-family Project - Sloans Lake, Denver</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
-            <div className="space-y-6">
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-lg mb-2">Design & Craftsmanship</div>
-                    <div className="text-gray-600 leading-relaxed">Unique materials and designs providing superior value, woodwork, casework, cabinetry, solid slab surfaces, tile work, and walk-in custom closets</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-lg mb-2">Technology & Security</div>
-                    <div className="text-gray-600 leading-relaxed">State-of-the-art audio, visual, media, and security technologies</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-lg mb-2">Outdoor Living</div>
-                    <div className="text-gray-600 leading-relaxed">Private rooftop decks with outdoor kitchens, fire pits, spas and dog-friendly synthetic grass</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-lg mb-2">Comfort & Wellness</div>
-                    <div className="text-gray-600 leading-relaxed">Individual unit laundry, heating, air conditioning, infrared HEPA air filtration systems</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-lg mb-2">Appliances & Fixtures</div>
-                    <div className="text-gray-600 leading-relaxed">Latest and best-in-class appliances, electrical fixtures, and plumbing fixtures</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div>
-                    <div className="font-bold text-gray-900 text-lg mb-2">Parking</div>
-                    <div className="text-gray-600 leading-relaxed">Private underground garages, charging stations, storage and bike rack</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Rooftop Deck */}
-      <section id="rooftop" className="py-12 sm:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              Rooftop Deck
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Unique private rooftop decks with every condominium unit
-            </p>
-          </div>
-          
-          {/* Feature Image - Rooftop Rendering */}
-          <div className="relative h-96 sm:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 mix-blend-overlay z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
-            <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600 text-lg">
-              Rooftop Deck Artist Rendering
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-              <p className="text-white text-lg sm:text-xl font-semibold mb-2">
-                Private Rooftop Decks - Artist Rendering
-              </p>
-              <p className="text-white/90 text-sm">
-                Each deck includes: full kitchen, fire pit, water feature, pet-friendly synthetic turf, pergola, maintenance-free decking
-              </p>
-            </div>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Elevated Living</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Open-air rooftop decks can positively impact daily quality of life. Liv1403 offers unique rooftop decks 
-                with every condominium unit. Each deck includes: full kitchen, fire pit, water feature, pet-friendly 
-                synthetic turf, pergola, maintenance-free decking.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Year-Round Usability</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Fortunately, in Denver, blue skies and warm temperatures of 50+ degree days can occur frequently 
-                through the coldest months of the winter.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Skyline Views</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Expansive, unobstructed views stretch from the Denver skyline to the Rocky Mountains, a rare vantage 
-                point in the Old South Pearl neighborhood.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Private Retreat</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Private rooftop decks can provide immediate solitude to focus and recharge, and views to take in and 
-                relax by. Convenience to the outdoors without having to leave your home.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Pet Owner Benefit</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Pet owners enjoy the ability to provide exercise and relief at a second's notice.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Location & Neighborhood */}
-      <section id="location" className="py-12 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              South Pearl St Community
-            </h2>
-          </div>
-          
-          {/* Feature Images */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
-              <Image 
-                src="/images/sign.webp" 
-                alt="Old South Pearl Street Sign"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white text-sm font-medium">Old South Pearl Street</p>
-              </div>
-            </div>
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
-              <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
-                South Pearl Street Farmers Market
-              </div>
-            </div>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-12">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Neighborhood Life</h3>
-              
-              <div className="space-y-6 mb-8">
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  South Pearl Street is one of Denver's most historic and vibrant shopping districts. Spanning Buchtel to 
-                  Jewell Avenues, its tree-lined blocks offer a charming alternative to malls, featuring unique local 
-                  shops, top-rated restaurants, lively nightspots, and year-round community events that draw visitors 
-                  and locals alike.
-                </p>
-              </div>
-              
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Sunday Farmers Market</h3>
-              
-              <div className="space-y-6 mb-8">
-                <p className="text-gray-600 leading-relaxed">
-                  With live music and a warm, welcoming spirit, the South Pearl Street Farmers Market supports and 
-                  enhances the surrounding community with a great variety of fresh and wholesome products.
-                </p>
-              </div>
-              
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">History</h3>
-              
-              <div className="space-y-6">
-                <p className="text-gray-600 leading-relaxed">
-                  Old South Pearl Street in Denver, established in 1893, has evolved into a vibrant destination. Once a 
-                  hub for artisans and merchants, it now boasts trendy boutiques, acclaimed restaurants like Sushi 
-                  Den, lively music festivals, and a thriving farmers' market, making it a beloved community 
-                  centerpiece.
-                </p>
-              </div>
-            </div>
-            
-            <div>
-              <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-gray-200 shadow-xl">
-                <h4 className="font-bold text-xl mb-6 text-gray-900">Location Map</h4>
-                <div className="relative h-96 rounded-xl overflow-hidden shadow-lg mb-6">
-                  <Image 
-                    src="/images/map.jpg" 
-                    alt="1403 S Pearl Street Location Map - Old South Pearl Retail and Entertainment District"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="text-sm text-gray-600 space-y-2 bg-gray-50 p-4 rounded-lg">
-                  <div className="font-bold text-gray-900 text-base">1403 S. Pearl Street</div>
-                  <div>Denver, Colorado</div>
-                  <div>Platt Park / Old South Pearl Neighborhood</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Historic Photo */}
-          <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden shadow-xl">
-            <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
-              Historic Old South Pearl Street Photo (1893)
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* South Pearl St Highlights */}
-      <section id="highlights" className="py-12 sm:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              South Pearl St Highlights
-            </h2>
-          </div>
-          
-          <div className="space-y-8">
-            {/* Michelin Restaurants */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-              <div className="grid md:grid-cols-2">
-                <div className="relative h-64 md:h-full">
-                  <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
-                    Michelin Restaurant - Kizaki or Margot
-                  </div>
-                </div>
-                <div className="p-8 sm:p-10 flex flex-col justify-center">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Nationally Acclaimed Restaurants</h3>
-                  <p className="text-gray-600 leading-relaxed text-lg">
-                    Old South Pearl Street has become a culinary hotspot, now boasting two Michelin-starred gems: 
-                    Kizaki for masterful sushi and Margot for innovative seasonal tasting menus.
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Trader Joe's */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-              <div className="grid md:grid-cols-2">
-                <div className="p-8 sm:p-10 flex flex-col justify-center order-2 md:order-1">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Trader Joe's is Coming</h3>
-                  <p className="text-gray-600 leading-relaxed text-lg">
-                    Exciting news for future residents of Liv1403: in 2026, a brand-new Trader Joe's is scheduled to 
-                    open just one block away. With its affordable organic options, specialty items, and 
-                    neighborhood-friendly vibe, having Trader Joe's within walking distance adds everyday 
-                    convenience and enhances the vibrant lifestyle of this sought-after Pearl Street location.
-                  </p>
-                </div>
-                <div className="relative h-64 md:h-full order-1 md:order-2">
-                  <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
-                    Trader Joe's Store
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* RTD Light Rail */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl">
-              <div className="grid md:grid-cols-2">
-                <div className="relative h-64 md:h-full">
-                  <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
-                    RTD Light Rail Station
-                  </div>
-                </div>
-                <div className="p-8 sm:p-10 flex flex-col justify-center">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Convenient Rapid Transit</h3>
-                  <p className="text-gray-600 leading-relaxed text-lg">
-                    Just blocks from Liv1403, the light rail station offers seamless access across the city-whether residents 
-                    are commuting downtown, exploring Denver's many attractions, or catching a flight at DIA. This 
-                    connectivity makes car-free living easy and adds comfortable convenience to an already prime 
-                    location.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Principal Background */}
       <section id="principal" className="py-12 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -822,6 +431,397 @@ export default function Home() {
                     children: McKenna, age 24, living in Seattle, Washington and thriving in the tech world, and Cole, age 23, a recent 
                     Computer Science graduate of Colorado State University, who is also thriving in his growing business and tech 
                     interests.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Design Highlights */}
+      <section id="design" className="py-12 sm:py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+              Design Highlights
+            </h2>
+          </div>
+          
+          {/* Image Gallery */}
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-12">
+            <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
+              <Image 
+                src="/images/about.png" 
+                alt="Previous Multi-family Project - Highlands, Denver"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="text-white text-xs font-medium">Previous Multi-family Project - Highlands, Denver</p>
+              </div>
+            </div>
+            <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
+              <Image 
+                src="/images/market.jpg" 
+                alt="Previous Project - Cherry Creek, Denver"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="text-white text-xs font-medium">Previous Project - Cherry Creek, Denver</p>
+              </div>
+            </div>
+            <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
+              <Image 
+                src="/images/hero.png" 
+                alt="Previous Multi-family Project - Sloans Lake, Denver"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <p className="text-white text-xs font-medium">Previous Multi-family Project - Sloans Lake, Denver</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
+            <div className="space-y-6">
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg mb-2">Design & Craftsmanship</div>
+                    <div className="text-gray-600 leading-relaxed">Unique materials and designs providing superior value, woodwork, casework, cabinetry, solid slab surfaces, tile work, and walk-in custom closets</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg mb-2">Technology & Security</div>
+                    <div className="text-gray-600 leading-relaxed">State-of-the-art audio, visual, media, and security technologies</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg mb-2">Outdoor Living</div>
+                    <div className="text-gray-600 leading-relaxed">Private rooftop decks with outdoor kitchens, fire pits, spas and dog-friendly synthetic grass</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg mb-2">Comfort & Wellness</div>
+                    <div className="text-gray-600 leading-relaxed">Individual unit laundry, heating, air conditioning, infrared HEPA air filtration systems</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg mb-2">Appliances & Fixtures</div>
+                    <div className="text-gray-600 leading-relaxed">Latest and best-in-class appliances, electrical fixtures, and plumbing fixtures</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white p-6 rounded-xl border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg mb-2">Parking</div>
+                    <div className="text-gray-600 leading-relaxed">Private underground garages, charging stations, storage and bike rack</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Rooftop Deck */}
+      <section id="rooftop" className="py-12 sm:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+              Rooftop Deck
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+              Unique private rooftop decks with every condominium unit
+            </p>
+          </div>
+          
+          {/* Feature Image - Rooftop Rendering */}
+          <div className="relative h-96 sm:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden mb-12 shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 mix-blend-overlay z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
+            <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600 text-lg">
+              Rooftop Deck Artist Rendering
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+              <p className="text-white text-lg sm:text-xl font-semibold mb-2">
+                Private Rooftop Decks - Artist Rendering
+              </p>
+              <p className="text-white/90 text-sm">
+                Each deck includes: full kitchen, fire pit, water feature, pet-friendly synthetic turf, pergola, maintenance-free decking
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-gray-900">Elevated Living</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Open-air rooftop decks can positively impact daily quality of life. Liv1403 offers unique rooftop decks 
+                with every condominium unit. Each deck includes: full kitchen, fire pit, water feature, pet-friendly 
+                synthetic turf, pergola, maintenance-free decking.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-gray-900">Year-Round Usability</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Fortunately, in Denver, blue skies and warm temperatures of 50+ degree days can occur frequently 
+                through the coldest months of the winter.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-gray-900">Skyline Views</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Expansive, unobstructed views stretch from the Denver skyline to the Rocky Mountains, a rare vantage 
+                point in the Old South Pearl neighborhood.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-gray-900">Private Retreat</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Private rooftop decks can provide immediate solitude to focus and recharge, and views to take in and 
+                relax by. Convenience to the outdoors without having to leave your home.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-gray-900">Pet Owner Benefit</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Pet owners enjoy the ability to provide exercise and relief at a second's notice.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Location & Neighborhood */}
+      <section id="location" className="py-12 sm:py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+              South Pearl St Community
+            </h2>
+          </div>
+          
+          {/* Feature Images */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
+              <Image 
+                src="/images/sign.webp" 
+                alt="Old South Pearl Street Sign"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <p className="text-white text-sm font-medium">Old South Pearl Street</p>
+              </div>
+            </div>
+            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
+              <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
+                South Pearl Street Farmers Market
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-12">
+            <div>
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Neighborhood Life</h3>
+              
+              <div className="space-y-6 mb-8">
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  South Pearl Street is one of Denver's most historic and vibrant shopping districts. Spanning Buchtel to 
+                  Jewell Avenues, its tree-lined blocks offer a charming alternative to malls, featuring unique local 
+                  shops, top-rated restaurants, lively nightspots, and year-round community events that draw visitors 
+                  and locals alike.
+                </p>
+              </div>
+              
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Sunday Farmers Market</h3>
+              
+              <div className="space-y-6 mb-8">
+                <p className="text-gray-600 leading-relaxed">
+                  With live music and a warm, welcoming spirit, the South Pearl Street Farmers Market supports and 
+                  enhances the surrounding community with a great variety of fresh and wholesome products.
+                </p>
+              </div>
+              
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">History</h3>
+              
+              <div className="space-y-6">
+                <p className="text-gray-600 leading-relaxed">
+                  Old South Pearl Street in Denver, established in 1893, has evolved into a vibrant destination. Once a 
+                  hub for artisans and merchants, it now boasts trendy boutiques, acclaimed restaurants like Sushi 
+                  Den, lively music festivals, and a thriving farmers' market, making it a beloved community 
+                  centerpiece.
+                </p>
+              </div>
+            </div>
+            
+            <div>
+              <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-gray-200 shadow-xl">
+                <h4 className="font-bold text-xl mb-6 text-gray-900">Location Map</h4>
+                <div className="relative h-96 rounded-xl overflow-hidden shadow-lg mb-6">
+                  <Image 
+                    src="/images/map.jpg" 
+                    alt="1403 S Pearl Street Location Map - Old South Pearl Retail and Entertainment District"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="text-sm text-gray-600 space-y-2 bg-gray-50 p-4 rounded-lg">
+                  <div className="font-bold text-gray-900 text-base">1403 S. Pearl Street</div>
+                  <div>Denver, Colorado</div>
+                  <div>Platt Park / Old South Pearl Neighborhood</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Historic Photo */}
+          <div className="relative h-64 sm:h-80 rounded-xl overflow-hidden shadow-xl">
+            <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
+              Historic Old South Pearl Street Photo (1893)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* South Pearl St Highlights */}
+      <section id="highlights" className="py-12 sm:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+              South Pearl St Highlights
+            </h2>
+          </div>
+          
+          <div className="space-y-8">
+            {/* Michelin Restaurants */}
+            <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-xl">
+              <div className="grid md:grid-cols-2">
+                <div className="relative h-64 md:h-full">
+                  <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
+                    Michelin Restaurant - Kizaki or Margot
+                  </div>
+                </div>
+                <div className="p-8 sm:p-10 flex flex-col justify-center">
+                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Nationally Acclaimed Restaurants</h3>
+                  <p className="text-gray-600 leading-relaxed text-lg">
+                    Old South Pearl Street has become a culinary hotspot, now boasting two Michelin-starred gems: 
+                    Kizaki for masterful sushi and Margot for innovative seasonal tasting menus.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Trader Joe's */}
+            <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-xl">
+              <div className="grid md:grid-cols-2">
+                <div className="p-8 sm:p-10 flex flex-col justify-center order-2 md:order-1">
+                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Trader Joe's is Coming</h3>
+                  <p className="text-gray-600 leading-relaxed text-lg">
+                    Exciting news for future residents of Liv1403: in 2026, a brand-new Trader Joe's is scheduled to 
+                    open just one block away. With its affordable organic options, specialty items, and 
+                    neighborhood-friendly vibe, having Trader Joe's within walking distance adds everyday 
+                    convenience and enhances the vibrant lifestyle of this sought-after Pearl Street location.
+                  </p>
+                </div>
+                <div className="relative h-64 md:h-full order-1 md:order-2">
+                  <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
+                    Trader Joe's Store
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* RTD Light Rail */}
+            <div className="bg-gray-50 rounded-2xl overflow-hidden shadow-xl">
+              <div className="grid md:grid-cols-2">
+                <div className="relative h-64 md:h-full">
+                  <div className="absolute inset-0 bg-gray-300 flex items-center justify-center text-gray-600">
+                    RTD Light Rail Station
+                  </div>
+                </div>
+                <div className="p-8 sm:p-10 flex flex-col justify-center">
+                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+                    <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Convenient Rapid Transit</h3>
+                  <p className="text-gray-600 leading-relaxed text-lg">
+                    Just blocks from Liv1403, the light rail station offers seamless access across the city-whether residents 
+                    are commuting downtown, exploring Denver's many attractions, or catching a flight at DIA. This 
+                    connectivity makes car-free living easy and adds comfortable convenience to an already prime 
+                    location.
                   </p>
                 </div>
               </div>
