@@ -1,4 +1,6 @@
 import { supabaseAdmin } from '../../../lib/supabase'
+import { resend, FROM_EMAIL, MANAGER_EMAIL } from '../../../lib/resend'
+import { applicantConfirmationEmail, managerNotificationEmail } from '../../../lib/email-templates'
 
 // POST /api/applications - Submit a new investor application
 export async function POST(request) {
@@ -76,8 +78,41 @@ export async function POST(request) {
       }, { status: 500 })
     }
 
-    // TODO: Send email notification to admin team
-    // This would typically use a service like SendGrid, AWS SES, or Resend
+    // Send confirmation email to applicant
+    try {
+      const confirmationEmail = applicantConfirmationEmail(newApplication)
+      
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: newApplication.email,
+        subject: confirmationEmail.subject,
+        html: confirmationEmail.html,
+        text: confirmationEmail.text
+      })
+      
+      console.log('✅ Confirmation email sent to applicant:', newApplication.email)
+    } catch (emailError) {
+      console.error('❌ Error sending confirmation email:', emailError)
+      // Don't fail the whole request if email fails
+    }
+
+    // Send notification email to manager
+    try {
+      const notificationEmail = managerNotificationEmail(newApplication)
+      
+      await resend.emails.send({
+        from: FROM_EMAIL,
+        to: MANAGER_EMAIL,
+        subject: notificationEmail.subject,
+        html: notificationEmail.html,
+        text: notificationEmail.text
+      })
+      
+      console.log('✅ Notification email sent to manager:', MANAGER_EMAIL)
+    } catch (emailError) {
+      console.error('❌ Error sending notification email:', emailError)
+      // Don't fail the whole request if email fails
+    }
     
     console.log('New application submitted:', {
       id: newApplication.id,
@@ -87,7 +122,7 @@ export async function POST(request) {
 
     return Response.json({ 
       success: true,
-      message: 'Application submitted successfully! Our team will review your application and contact you within 1-2 business days.',
+      message: 'Application submitted successfully! Check your email for confirmation. Our team will review your application and contact you within 1-2 business days.',
       application_id: newApplication.id
     })
 
