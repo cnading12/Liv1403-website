@@ -12,7 +12,7 @@ export default function InvestmentPortal() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [hasAgreedToDisclaimer, setHasAgreedToDisclaimer] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
-  
+
   // Admin functionality state
   const [applications, setApplications] = useState([]);
   const [selectedApp, setSelectedApp] = useState(null);
@@ -25,11 +25,13 @@ export default function InvestmentPortal() {
     password: ''
   });
 
+  const [buyerApplications, setBuyerApplications] = useState([]);
+
   // Check for existing token on page load
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
-    
+
     if (token && userData) {
       try {
         const user = JSON.parse(userData);
@@ -47,12 +49,14 @@ export default function InvestmentPortal() {
     if (showAdminPanel && currentUser?.role === 'admin') {
       fetchApplications();
       fetchUsers();
+      fetchBuyerApplications(); // Add this line
+
     }
   }, [showAdminPanel, currentUser]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+
     if (!hasAgreedToDisclaimer) {
       setError('You must agree to the disclaimers and confidentiality terms before proceeding.');
       return;
@@ -75,7 +79,7 @@ export default function InvestmentPortal() {
       if (response.ok && data.success) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        
+
         setCurrentUser(data.user);
         setIsAuthenticated(true);
         setError('');
@@ -101,6 +105,22 @@ export default function InvestmentPortal() {
     setPassword('');
     setShowAdminPanel(false);
     setActiveTab('dashboard');
+  };
+
+  const fetchBuyerApplications = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/applications/buyer/admin', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setBuyerApplications(data.applications || []);
+      }
+    } catch (error) {
+      console.error('Error fetching buyer applications:', error);
+    }
   };
 
   const fetchApplications = async () => {
@@ -141,7 +161,7 @@ export default function InvestmentPortal() {
 
   const handleApproveApplication = async (id) => {
     if (!confirm('Approve and create user account?')) return;
-    
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('/api/applications/admin', {
@@ -150,15 +170,15 @@ export default function InvestmentPortal() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ 
-          application_id: id, 
-          status: 'approved', 
-          create_user: true 
+        body: JSON.stringify({
+          application_id: id,
+          status: 'approved',
+          create_user: true
         }),
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         alert(`Approved! Temp password: ${data.temp_password}`);
         fetchApplications();
@@ -174,7 +194,7 @@ export default function InvestmentPortal() {
 
   const handleRejectApplication = async (id) => {
     if (!confirm('Reject this application?')) return;
-    
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('/api/applications/admin', {
@@ -183,9 +203,9 @@ export default function InvestmentPortal() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ 
-          application_id: id, 
-          status: 'rejected' 
+        body: JSON.stringify({
+          application_id: id,
+          status: 'rejected'
         }),
       });
 
@@ -204,7 +224,7 @@ export default function InvestmentPortal() {
 
   const handleDeleteApplication = async (id) => {
     if (!confirm('Delete permanently?')) return;
-    
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`/api/applications/admin?id=${id}`, {
@@ -229,7 +249,7 @@ export default function InvestmentPortal() {
 
   const handleAddUser = async (e) => {
     e.preventDefault();
-    
+
     if (users.find(u => u.email === newUser.email)) {
       alert('A user with this email already exists.');
       return;
@@ -268,7 +288,7 @@ export default function InvestmentPortal() {
       alert('You cannot delete your own account.');
       return;
     }
-    
+
     if (confirm('Are you sure you want to delete this user?')) {
       try {
         const token = localStorage.getItem('token');
@@ -310,7 +330,7 @@ export default function InvestmentPortal() {
 
       if (response.ok) {
         const data = await response.json();
-        setUsers(users.map(u => 
+        setUsers(users.map(u =>
           u.id === userId ? data.user : u
         ));
       } else {
@@ -442,7 +462,7 @@ export default function InvestmentPortal() {
               <p className="text-gray-300 text-sm text-center mb-4">
                 Need access to the portal?
               </p>
-              
+
               <div className="space-y-3">
                 <button
                   onClick={handleRequestPassword}
@@ -453,7 +473,7 @@ export default function InvestmentPortal() {
                   </svg>
                   <span>Apply for Access</span>
                 </button>
-                
+
                 <button
                   onClick={handleCall}
                   className="w-full bg-white/10 text-white py-3 rounded-lg font-medium hover:bg-white/20 transition-colors flex items-center justify-center space-x-2"
@@ -469,7 +489,7 @@ export default function InvestmentPortal() {
 
           <div className="text-center mt-6">
             <p className="text-gray-400 text-xs">
-              This portal contains confidential investment materials. 
+              This portal contains confidential investment materials.
               Unauthorized access is prohibited.
             </p>
           </div>
@@ -535,11 +555,10 @@ export default function InvestmentPortal() {
                         <td className="px-4 py-3 text-sm text-gray-900">{app.phone}</td>
                         <td className="px-4 py-3 text-sm text-gray-900">{app.investment_amount}</td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            app.status === 'approved' ? 'bg-green-100 text-green-800' :
-                            app.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                            'bg-yellow-100 text-yellow-800'
-                          }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs ${app.status === 'approved' ? 'bg-green-100 text-green-800' :
+                              app.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                'bg-yellow-100 text-yellow-800'
+                            }`}>
                             {app.status}
                           </span>
                         </td>
@@ -606,16 +625,14 @@ export default function InvestmentPortal() {
                         <td className="px-4 py-3 text-sm text-gray-900">{user.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-900">{user.email}</td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'
-                          }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'
+                            }`}>
                             {user.role}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                          }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs ${user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                            }`}>
                             {user.status}
                           </span>
                         </td>
@@ -626,11 +643,10 @@ export default function InvestmentPortal() {
                           <div className="flex space-x-2">
                             <button
                               onClick={() => handleToggleUserStatus(user.id)}
-                              className={`px-3 py-1 rounded text-xs ${
-                                user.status === 'active' 
-                                  ? 'bg-red-100 text-red-800 hover:bg-red-200' 
+                              className={`px-3 py-1 rounded text-xs ${user.status === 'active'
+                                  ? 'bg-red-100 text-red-800 hover:bg-red-200'
                                   : 'bg-green-100 text-green-800 hover:bg-green-200'
-                              }`}
+                                }`}
                             >
                               {user.status === 'active' ? 'Deactivate' : 'Activate'}
                             </button>
@@ -734,41 +750,37 @@ export default function InvestmentPortal() {
               <nav className="flex space-x-8">
                 <button
                   onClick={() => setActiveTab('dashboard')}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'dashboard'
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'dashboard'
                       ? 'border-yellow-600 text-yellow-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                    }`}
                 >
                   Investment Dashboard
                 </button>
                 <button
                   onClick={() => setActiveTab('financials')}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'financials'
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'financials'
                       ? 'border-yellow-600 text-yellow-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                    }`}
                 >
                   Financial Details
                 </button>
                 <button
                   onClick={() => setActiveTab('documents')}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'documents'
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'documents'
                       ? 'border-yellow-600 text-yellow-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                    }`}
                 >
                   Documents
                 </button>
                 <button
                   onClick={() => setActiveTab('updates')}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                    activeTab === 'updates'
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'updates'
                       ? 'border-yellow-600 text-yellow-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                  }`}
+                    }`}
                 >
                   Project Updates
                 </button>
@@ -781,7 +793,7 @@ export default function InvestmentPortal() {
               <div className="space-y-8">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Investment Overview</h2>
-                  
+
                   {/* Key Metrics Grid */}
                   <div className="grid md:grid-cols-4 gap-6 mb-8">
                     <div className="bg-white rounded-xl border border-gray-200 p-6">
@@ -789,19 +801,19 @@ export default function InvestmentPortal() {
                       <div className="text-3xl font-bold text-gray-900">$6.2M</div>
                       <div className="text-xs text-gray-500 mt-2">75% Debt | 25% Equity</div>
                     </div>
-                    
+
                     <div className="bg-white rounded-xl border border-gray-200 p-6">
                       <div className="text-sm text-gray-600 mb-2">Projected Finished Value</div>
                       <div className="text-3xl font-bold text-green-600">$8.2M</div>
                       <div className="text-xs text-gray-500 mt-2">At completion</div>
                     </div>
-                    
+
                     <div className="bg-white rounded-xl border border-gray-200 p-6">
                       <div className="text-sm text-gray-600 mb-2">Estimated Project IRR</div>
                       <div className="text-3xl font-bold text-yellow-600">39.48%</div>
                       <div className="text-xs text-gray-500 mt-2">Annual return</div>
                     </div>
-                    
+
                     <div className="bg-white rounded-xl border border-gray-200 p-6">
                       <div className="text-sm text-gray-600 mb-2">Estimated Project MOIC</div>
                       <div className="text-3xl font-bold text-blue-600">1.32x</div>
@@ -833,7 +845,7 @@ export default function InvestmentPortal() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div>
                         <div className="flex justify-between mb-2">
                           <span className="text-gray-700">Debt Financing (75% LTC)</span>
@@ -845,7 +857,7 @@ export default function InvestmentPortal() {
                         <div className="text-xs text-gray-500 mt-1">75% loan-to-cost</div>
                       </div>
                     </div>
-                    
+
                     <div className="mt-6 pt-6 border-t border-gray-200">
                       <div className="flex justify-between items-center">
                         <span className="text-gray-700 font-medium">Minimum Member Investment</span>
@@ -873,7 +885,7 @@ export default function InvestmentPortal() {
                           <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">90/10</span>
                         </div>
                       </div>
-                      
+
                       <div className="border-l-4 border-green-600 pl-4">
                         <div className="flex justify-between items-start mb-2">
                           <div>
@@ -885,7 +897,7 @@ export default function InvestmentPortal() {
                           <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">90/10</span>
                         </div>
                       </div>
-                      
+
                       <div className="border-l-4 border-yellow-600 pl-4">
                         <div className="flex justify-between items-start mb-2">
                           <div>
@@ -897,7 +909,7 @@ export default function InvestmentPortal() {
                           <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">70/30</span>
                         </div>
                       </div>
-                      
+
                       <div className="border-l-4 border-purple-600 pl-4">
                         <div className="flex justify-between items-start mb-2">
                           <div>
@@ -923,21 +935,21 @@ export default function InvestmentPortal() {
                         Construction
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center">
                       <div className="w-32 text-sm text-gray-600">Months 3-14</div>
                       <div className="flex-1 ml-24 bg-green-600 rounded-full h-8 flex items-center px-4 text-white text-sm font-medium">
                         Presales start
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center">
                       <div className="w-32 text-sm text-gray-600">Months 14-16</div>
                       <div className="flex-1 ml-48 bg-yellow-600 rounded-full h-8 flex items-center px-4 text-white text-sm font-medium">
                         Presales closing
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center">
                       <div className="w-32 text-sm text-gray-600">Months 16-18</div>
                       <div className="flex-1 ml-56 bg-purple-600 rounded-full h-8 flex items-center px-4 text-white text-sm font-medium">
@@ -945,14 +957,14 @@ export default function InvestmentPortal() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-700 font-medium">Targeted Completion</span>
                       <span className="text-xl font-bold text-gray-900">5/15/2027</span>
                     </div>
                   </div>
-                  
+
                   <div className="mt-6 pt-6 border-t border-gray-200 bg-yellow-50 rounded-lg p-4">
                     <p className="text-sm text-gray-700">
                       <strong>Important:</strong> All future dates and anticipated milestones are estimates only. Actual timing may materially differ. Please see the "Disclosures" provided on p. 14 of the Investment Presentation. The Company does not guarantee any future performance, results, or timeframes.
@@ -965,7 +977,7 @@ export default function InvestmentPortal() {
             {activeTab === 'financials' && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900">Detailed Financial Breakdown</h2>
-                
+
                 {/* Project Budget */}
                 <div className="bg-white rounded-xl border border-gray-200 p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Projected Budget</h3>
@@ -1031,7 +1043,7 @@ export default function InvestmentPortal() {
                       </tbody>
                     </table>
                   </div>
-                  
+
                   <div className="mt-6 pt-6 border-t border-gray-200 bg-yellow-50 rounded-lg p-4">
                     <p className="text-sm text-gray-700">
                       <strong>Important:</strong> All budgeted amounts are estimates only and may materially differ in practice. Many construction costs are outside of the Company's control. Please see the "Disclosures" provided on p. 14. Changes in budgeted costs may materially and negatively impact investor returns.
@@ -1047,9 +1059,9 @@ export default function InvestmentPortal() {
                   </p>
                   <div className="space-y-4">
                     <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                      <a 
-                        href="https://www.1411southpearl.com" 
-                        target="_blank" 
+                      <a
+                        href="https://www.1411southpearl.com"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="font-semibold text-blue-600 hover:text-blue-700 mb-2 inline-flex items-center"
                       >
@@ -1062,11 +1074,11 @@ export default function InvestmentPortal() {
                         Market rental rates between $3.90 - $5.00 PSF per month • Extremely low vacancy and often times have wait lists to be approved for tenancy
                       </div>
                     </div>
-                    
+
                     <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                      <a 
-                        href="https://1745southpearl.com" 
-                        target="_blank" 
+                      <a
+                        href="https://1745southpearl.com"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="font-semibold text-blue-600 hover:text-blue-700 mb-2 inline-flex items-center"
                       >
@@ -1079,11 +1091,11 @@ export default function InvestmentPortal() {
                         Constructed by Lance Nading (Principal of Liv1403) in 2021 • Market rental rates between $3.90 - $5.00 PSF per month • Extremely low vacancy and often times have wait lists to be approved for tenancy
                       </div>
                     </div>
-                    
+
                     <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                      <a 
-                        href="https://cornerstoneapartments.com/our-buildings/1775-s-pearl/" 
-                        target="_blank" 
+                      <a
+                        href="https://cornerstoneapartments.com/our-buildings/1775-s-pearl/"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="font-semibold text-blue-600 hover:text-blue-700 mb-2 inline-flex items-center"
                       >
@@ -1097,14 +1109,14 @@ export default function InvestmentPortal() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                     <div className="font-semibold text-blue-900 mb-2">Market Value Analysis</div>
                     <div className="text-sm text-blue-800">
                       Each of the above apartment buildings' market value at a 5% cap rate calculated on their net rental income exceeds the targeted market per square foot sale price value for Liv1403.
                     </div>
                   </div>
-                  
+
                   <div className="mt-4 p-4 bg-green-50 rounded-lg">
                     <div className="font-semibold text-green-900 mb-2">First to Market For-Sale Condos</div>
                     <div className="text-sm text-green-800">
@@ -1144,7 +1156,7 @@ export default function InvestmentPortal() {
                   <h3 className="text-xl font-bold text-red-900 mb-4">Investment Risk Disclosure</h3>
                   <div className="space-y-3 text-sm text-red-800">
                     <p><strong>Important:</strong> Target returns are estimates. Any actual returns may materially differ. Please see the "Disclosures" provided on p. 14. Investing in the Company is high risk, and you could lose all your investment. The Company does not guarantee any returns.</p>
-                    
+
                     <p className="mt-4"><strong>Key Risk Factors:</strong></p>
                     <ul className="space-y-2 ml-4 list-disc">
                       <li>All investments in the Company are speculative, illiquid, and subject to restrictions on transfer</li>
@@ -1268,13 +1280,13 @@ export default function InvestmentPortal() {
                     Need help with any documents or have questions about the investment process?
                   </p>
                   <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
-                    <a 
+                    <a
                       href="mailto:lance.nading@c3hdenver.com"
                       className="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium text-center"
                     >
                       Email Lance Nading
                     </a>
-                    <a 
+                    <a
                       href="tel:+1-303-359-8337"
                       className="bg-white text-yellow-600 border border-yellow-600 px-4 py-2 rounded-lg hover:bg-yellow-50 transition-colors text-sm font-medium text-center"
                     >

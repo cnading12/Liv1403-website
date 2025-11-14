@@ -1,7 +1,76 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+
+//Buyer Constants
+const [isBuyerAuthenticated, setIsBuyerAuthenticated] = useState(false);
+const [currentBuyer, setCurrentBuyer] = useState(null);
+const [showBuyerLogin, setShowBuyerLogin] = useState(false);
+const [buyerEmail, setBuyerEmail] = useState('');
+const [buyerPassword, setBuyerPassword] = useState('');
+const [buyerLoginError, setBuyerLoginError] = useState('');
+const [buyerLoginLoading, setBuyerLoginLoading] = useState(false);
+
+useEffect(() => {
+  const token = localStorage.getItem('buyer_token');
+  const userData = localStorage.getItem('buyer_user');
+  
+  if (token && userData) {
+    try {
+      const user = JSON.parse(userData);
+      if (user.role === 'buyer') {
+        setCurrentBuyer(user);
+        setIsBuyerAuthenticated(true);
+      }
+    } catch (error) {
+      localStorage.removeItem('buyer_token');
+      localStorage.removeItem('buyer_user');
+    }
+  }
+}, []);
+
+const handleBuyerLogin = async (e) => {
+  e.preventDefault();
+  setBuyerLoginLoading(true);
+  setBuyerLoginError('');
+
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: buyerEmail, password: buyerPassword }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.success && data.user.role === 'buyer') {
+      localStorage.setItem('buyer_token', data.token);
+      localStorage.setItem('buyer_user', JSON.stringify(data.user));
+      
+      setCurrentBuyer(data.user);
+      setIsBuyerAuthenticated(true);
+      setShowBuyerLogin(false);
+    } else if (data.user && data.user.role !== 'buyer') {
+      setBuyerLoginError('This account does not have buyer access.');
+    } else {
+      setBuyerLoginError(data.error || 'Login failed.');
+    }
+  } catch (error) {
+    setBuyerLoginError('Network error. Please try again.');
+  } finally {
+    setBuyerLoginLoading(false);
+  }
+};
+
+const handleBuyerLogout = () => {
+  localStorage.removeItem('buyer_token');
+  localStorage.removeItem('buyer_user');
+  setIsBuyerAuthenticated(false);
+  setCurrentBuyer(null);
+  setBuyerEmail('');
+  setBuyerPassword('');
+};
 
 // Unit data
 const UNITS = [
