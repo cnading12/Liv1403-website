@@ -3,75 +3,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-//Buyer Constants
-const [isBuyerAuthenticated, setIsBuyerAuthenticated] = useState(false);
-const [currentBuyer, setCurrentBuyer] = useState(null);
-const [showBuyerLogin, setShowBuyerLogin] = useState(false);
-const [buyerEmail, setBuyerEmail] = useState('');
-const [buyerPassword, setBuyerPassword] = useState('');
-const [buyerLoginError, setBuyerLoginError] = useState('');
-const [buyerLoginLoading, setBuyerLoginLoading] = useState(false);
-
-useEffect(() => {
-  const token = localStorage.getItem('buyer_token');
-  const userData = localStorage.getItem('buyer_user');
-  
-  if (token && userData) {
-    try {
-      const user = JSON.parse(userData);
-      if (user.role === 'buyer') {
-        setCurrentBuyer(user);
-        setIsBuyerAuthenticated(true);
-      }
-    } catch (error) {
-      localStorage.removeItem('buyer_token');
-      localStorage.removeItem('buyer_user');
-    }
-  }
-}, []);
-
-const handleBuyerLogin = async (e) => {
-  e.preventDefault();
-  setBuyerLoginLoading(true);
-  setBuyerLoginError('');
-
-  try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: buyerEmail, password: buyerPassword }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok && data.success && data.user.role === 'buyer') {
-      localStorage.setItem('buyer_token', data.token);
-      localStorage.setItem('buyer_user', JSON.stringify(data.user));
-      
-      setCurrentBuyer(data.user);
-      setIsBuyerAuthenticated(true);
-      setShowBuyerLogin(false);
-    } else if (data.user && data.user.role !== 'buyer') {
-      setBuyerLoginError('This account does not have buyer access.');
-    } else {
-      setBuyerLoginError(data.error || 'Login failed.');
-    }
-  } catch (error) {
-    setBuyerLoginError('Network error. Please try again.');
-  } finally {
-    setBuyerLoginLoading(false);
-  }
-};
-
-const handleBuyerLogout = () => {
-  localStorage.removeItem('buyer_token');
-  localStorage.removeItem('buyer_user');
-  setIsBuyerAuthenticated(false);
-  setCurrentBuyer(null);
-  setBuyerEmail('');
-  setBuyerPassword('');
-};
-
 // Unit data
 const UNITS = [
   {
@@ -145,12 +76,79 @@ const UNITS = [
 export default function BuyerPortal() {
   const [activeTab, setActiveTab] = useState('units');
   const [selectedUnit, setSelectedUnit] = useState<number | null>(null);
-
+  //Buyer Constants
+  const [isBuyerAuthenticated, setIsBuyerAuthenticated] = useState(false);
+  const [currentBuyer, setCurrentBuyer] = useState(null);
+  const [showBuyerLogin, setShowBuyerLogin] = useState(false);
+  const [buyerEmail, setBuyerEmail] = useState('');
+  const [buyerPassword, setBuyerPassword] = useState('');
+  const [buyerLoginError, setBuyerLoginError] = useState('');
+  const [buyerLoginLoading, setBuyerLoginLoading] = useState(false);
   const handleUnitInquiry = (unitId: number) => {
     const unit = UNITS.find(u => u.id === unitId);
     window.location.href = `mailto:lance.nading@liv1403.com?subject=Inquiry about ${unit?.name}&body=Hello,%0D%0A%0D%0AI am interested in learning more about ${unit?.name} at Liv 1403.%0D%0A%0D%0APlease contact me to schedule a showing or provide additional information.%0D%0A%0D%0AThank you`;
   };
 
+
+  useEffect(() => {
+    const token = localStorage.getItem('buyer_token');
+    const userData = localStorage.getItem('buyer_user');
+
+    if (token && userData) {
+      try {
+        const user = JSON.parse(userData);
+        if (user.role === 'buyer') {
+          setCurrentBuyer(user);
+          setIsBuyerAuthenticated(true);
+        }
+      } catch (error) {
+        localStorage.removeItem('buyer_token');
+        localStorage.removeItem('buyer_user');
+      }
+    }
+  }, []);
+
+  const handleBuyerLogin = async (e) => {
+    e.preventDefault();
+    setBuyerLoginLoading(true);
+    setBuyerLoginError('');
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: buyerEmail, password: buyerPassword }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success && data.user.role === 'buyer') {
+        localStorage.setItem('buyer_token', data.token);
+        localStorage.setItem('buyer_user', JSON.stringify(data.user));
+
+        setCurrentBuyer(data.user);
+        setIsBuyerAuthenticated(true);
+        setShowBuyerLogin(false);
+      } else if (data.user && data.user.role !== 'buyer') {
+        setBuyerLoginError('This account does not have buyer access.');
+      } else {
+        setBuyerLoginError(data.error || 'Login failed.');
+      }
+    } catch (error) {
+      setBuyerLoginError('Network error. Please try again.');
+    } finally {
+      setBuyerLoginLoading(false);
+    }
+  };
+
+  const handleBuyerLogout = () => {
+    localStorage.removeItem('buyer_token');
+    localStorage.removeItem('buyer_user');
+    setIsBuyerAuthenticated(false);
+    setCurrentBuyer(null);
+    setBuyerEmail('');
+    setBuyerPassword('');
+  };
   return (
     <main className="bg-gray-50 pt-[92px] min-h-screen">
       {/* Hero Section */}
@@ -159,13 +157,13 @@ export default function BuyerPortal() {
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-800/60 z-10" />
           {/* Background image would go here */}
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center py-20">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Own Your Piece of Old South Pearl
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Discover luxury condominium living in Denver's most vibrant walkable neighborhood. 
+            Discover luxury condominium living in Denver's most vibrant walkable neighborhood.
             6 exclusive units now available for pre-sale.
           </p>
           <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
@@ -183,13 +181,13 @@ export default function BuyerPortal() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <a
               href="#units-section"
               className="bg-yellow-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-700 transition-all duration-300 transform hover:scale-105"
             >
               View Available Units
             </a>
-            <a 
+            <a
               href="#contact-section"
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300"
             >
@@ -233,51 +231,46 @@ export default function BuyerPortal() {
           <nav className="flex space-x-8 overflow-x-auto">
             <button
               onClick={() => setActiveTab('units')}
-              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
-                activeTab === 'units'
+              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'units'
                   ? 'border-yellow-600 text-yellow-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+                }`}
             >
               Available Units
             </button>
             <button
               onClick={() => setActiveTab('amenities')}
-              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
-                activeTab === 'amenities'
+              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'amenities'
                   ? 'border-yellow-600 text-yellow-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+                }`}
             >
               Amenities & Features
             </button>
             <button
               onClick={() => setActiveTab('neighborhood')}
-              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
-                activeTab === 'neighborhood'
+              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'neighborhood'
                   ? 'border-yellow-600 text-yellow-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+                }`}
             >
               Neighborhood
             </button>
             <button
               onClick={() => setActiveTab('process')}
-              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
-                activeTab === 'process'
+              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'process'
                   ? 'border-yellow-600 text-yellow-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+                }`}
             >
               Purchase Process
             </button>
             <button
               onClick={() => setActiveTab('faq')}
-              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
-                activeTab === 'faq'
+              className={`py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${activeTab === 'faq'
                   ? 'border-yellow-600 text-yellow-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
+                }`}
             >
               FAQ
             </button>
@@ -293,7 +286,7 @@ export default function BuyerPortal() {
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-gray-900 mb-4">Available Residences</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Each residence at Liv 1403 features a private rooftop deck, underground parking, 
+                Each residence at Liv 1403 features a private rooftop deck, underground parking,
                 and the finest luxury finishes. Pre-sales now available with flexible terms.
               </p>
             </div>
@@ -310,9 +303,8 @@ export default function BuyerPortal() {
                         <div className="text-sm">Floor Plan Coming Soon</div>
                       </div>
                     </div>
-                    <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold ${
-                      unit.status === 'Available' ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
-                    }`}>
+                    <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold ${unit.status === 'Available' ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
+                      }`}>
                       {unit.status}
                     </div>
                   </div>
@@ -387,11 +379,11 @@ export default function BuyerPortal() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <p className="text-gray-700 mb-4">
-                    Liv 1403 offers competitive pricing in Denver's luxury condominium market, with prices 
+                    Liv 1403 offers competitive pricing in Denver's luxury condominium market, with prices
                     ranging from approximately <strong>$850-$950 per square foot</strong> for interior space.
                   </p>
                   <p className="text-gray-700">
-                    Each unit includes a massive private rooftop deck (included in purchase price), 
+                    Each unit includes a massive private rooftop deck (included in purchase price),
                     2-car underground garage, and ultra-luxury finishes that rival properties at $1,000+ PSF.
                   </p>
                 </div>
@@ -567,8 +559,8 @@ export default function BuyerPortal() {
             <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Exceptional Build Quality</h3>
               <p className="text-gray-700 mb-4">
-                Built by Lance Nading, a third-generation Colorado builder with over 20 years of experience 
-                creating luxury homes and buildings in Denver. Every Liv 1403 residence reflects decades 
+                Built by Lance Nading, a third-generation Colorado builder with over 20 years of experience
+                creating luxury homes and buildings in Denver. Every Liv 1403 residence reflects decades
                 of craftsmanship and attention to detail.
               </p>
               <div className="grid md:grid-cols-3 gap-4">
@@ -604,7 +596,7 @@ export default function BuyerPortal() {
               <div className="bg-white rounded-xl border border-gray-200 p-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Walk to Everything</h3>
                 <p className="text-gray-700 mb-6">
-                  Live in the heart of Denver's most beloved neighborhood, where everything you need 
+                  Live in the heart of Denver's most beloved neighborhood, where everything you need
                   is just steps from your door.
                 </p>
                 <div className="space-y-4">
@@ -650,7 +642,7 @@ export default function BuyerPortal() {
               <div className="bg-white rounded-xl border border-gray-200 p-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Lifestyle & Culture</h3>
                 <p className="text-gray-700 mb-6">
-                  Old South Pearl Street is Denver's premier pedestrian-friendly neighborhood, 
+                  Old South Pearl Street is Denver's premier pedestrian-friendly neighborhood,
                   known for its vibrant street life and sense of community.
                 </p>
                 <ul className="space-y-3 text-gray-700">
@@ -698,7 +690,7 @@ export default function BuyerPortal() {
                   </div>
                 </div>
               </div>
-              <a 
+              <a
                 href="https://maps.google.com/?q=1403+S+Pearl+St,+Denver,+CO+80210"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -826,7 +818,7 @@ export default function BuyerPortal() {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3">Conventional Mortgages</h4>
                   <p className="text-gray-700 text-sm mb-4">
-                    Most buyers finance their purchase with a conventional mortgage. We work with several 
+                    Most buyers finance their purchase with a conventional mortgage. We work with several
                     lenders who specialize in new construction condominiums and can offer competitive rates.
                   </p>
                   <div className="bg-gray-50 p-4 rounded-lg text-sm">
@@ -847,7 +839,7 @@ export default function BuyerPortal() {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-3">All-Cash Purchases</h4>
                   <p className="text-gray-700 text-sm mb-4">
-                    Cash buyers enjoy a simpler closing process with fewer contingencies. We welcome 
+                    Cash buyers enjoy a simpler closing process with fewer contingencies. We welcome
                     all-cash offers and can often accommodate faster closing timelines.
                   </p>
                   <div className="bg-green-50 p-4 rounded-lg text-sm">
@@ -875,8 +867,8 @@ export default function BuyerPortal() {
 
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <p className="text-sm text-gray-700">
-                  <strong>Need a lender recommendation?</strong> We work with several mortgage brokers 
-                  and banks who have experience with new construction and can help you find the best rates 
+                  <strong>Need a lender recommendation?</strong> We work with several mortgage brokers
+                  and banks who have experience with new construction and can help you find the best rates
                   and terms for your situation.
                 </p>
               </div>
@@ -912,7 +904,7 @@ export default function BuyerPortal() {
                 />
               </div>
               <div className="mt-6 text-sm text-gray-700">
-                <strong>Expected Move-In:</strong> May 2027. Timeline is approximate and subject to change 
+                <strong>Expected Move-In:</strong> May 2027. Timeline is approximate and subject to change
                 based on weather, permitting, and other factors beyond our control.
               </div>
             </div>
@@ -1017,13 +1009,13 @@ export default function BuyerPortal() {
                 We're here to help! Contact us to schedule a personal consultation and tour.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
+                <a
                   href="mailto:lance.nading@liv1403.com"
                   className="bg-yellow-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-yellow-700 transition-colors text-center"
                 >
                   Email Lance Nading
                 </a>
-                <a 
+                <a
                   href="tel:720-359-8337"
                   className="bg-white text-yellow-600 border-2 border-yellow-600 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-50 transition-colors text-center"
                 >
@@ -1044,7 +1036,7 @@ export default function BuyerPortal() {
           <p className="text-xl text-gray-300 mb-12">
             Schedule a private showing to see floor plans, discuss available units, and learn more about ownership opportunities.
           </p>
-          
+
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div>
               <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1056,7 +1048,7 @@ export default function BuyerPortal() {
               <div className="font-bold">Lance Nading</div>
               <div className="text-sm text-gray-400">C3H Development</div>
             </div>
-            
+
             <div>
               <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1068,7 +1060,7 @@ export default function BuyerPortal() {
                 720-359-8337
               </a>
             </div>
-            
+
             <div>
               <div className="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1083,13 +1075,13 @@ export default function BuyerPortal() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <a
               href="mailto:lance.nading@liv1403.com?subject=Schedule Showing - Liv 1403"
               className="bg-yellow-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-700 transition-all duration-300 transform hover:scale-105"
             >
               Email to Schedule
             </a>
-            <a 
+            <a
               href="tel:720-359-8337"
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300"
             >
@@ -1106,20 +1098,20 @@ export default function BuyerPortal() {
             <h3 className="text-xl font-bold text-gray-900 mb-4">Important Information</h3>
             <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
               <p>
-                <strong>Marketing Materials:</strong> All renderings, floor plans, specifications, and pricing 
+                <strong>Marketing Materials:</strong> All renderings, floor plans, specifications, and pricing
                 are approximate and subject to change without notice. Actual units may differ from marketing materials.
               </p>
               <p>
-                <strong>Completion Timeline:</strong> The expected completion date of May 2027 is an estimate 
+                <strong>Completion Timeline:</strong> The expected completion date of May 2027 is an estimate
                 and may change due to weather, permitting, inspections, or other factors beyond the developer's control.
               </p>
               <p>
-                <strong>Not an Offer:</strong> This website does not constitute an offer to sell real estate. 
+                <strong>Not an Offer:</strong> This website does not constitute an offer to sell real estate.
                 All sales are subject to execution of a formal purchase and sale agreement.
               </p>
               <p>
-                <strong>Buyer Due Diligence:</strong> Prospective buyers should conduct their own due diligence, 
-                including reviewing all HOA documents, obtaining independent inspections, and consulting with 
+                <strong>Buyer Due Diligence:</strong> Prospective buyers should conduct their own due diligence,
+                including reviewing all HOA documents, obtaining independent inspections, and consulting with
                 legal and financial advisors before purchasing.
               </p>
             </div>
@@ -1131,14 +1123,14 @@ export default function BuyerPortal() {
 }
 
 // Component definitions
-function ProcessStep({ 
-  number, 
-  title, 
-  description, 
+function ProcessStep({
+  number,
+  title,
+  description,
   info,
   action,
   actionHref
-}: { 
+}: {
   number: string;
   title: string;
   description: string;
@@ -1151,17 +1143,17 @@ function ProcessStep({
       <div className="absolute left-0 w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center font-bold text-xl text-white">
         {number}
       </div>
-      
+
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
         <p className="text-gray-600 mb-4">{description}</p>
-        
+
         {info && (
           <div className="text-sm text-gray-500 mb-4 bg-gray-50 p-3 rounded">
             {info}
           </div>
         )}
-        
+
         {action && actionHref && (
           <a
             href={actionHref}
@@ -1198,7 +1190,7 @@ function TimelineBar({
         </div>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2">
-        <div 
+        <div
           className="bg-yellow-600 h-2 rounded-full transition-all duration-500"
           style={{ width: `${progress}%` }}
         ></div>
