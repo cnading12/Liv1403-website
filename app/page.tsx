@@ -29,24 +29,24 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
         {/* Background Image Carousel */}
-{/* Background Image Carousel */}
-<div className="absolute inset-0 z-0">
-  {HERO_IMAGES.map((image, idx) => (
-    <div
-      key={idx}
-      className={`absolute inset-0 transition-opacity duration-1000 ${idx === current ? 'opacity-40' : 'opacity-0'}`}
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/60 to-gray-800/50 z-10" />
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        className={idx === 0 ? "object-cover object-[center_60%]" : "object-cover"}
-        priority={idx === 0}
-      />
-    </div>
-  ))}
-</div>
+        {/* Background Image Carousel */}
+        <div className="absolute inset-0 z-0">
+          {HERO_IMAGES.map((image, idx) => (
+            <div
+              key={idx}
+              className={`absolute inset-0 transition-opacity duration-1000 ${idx === current ? 'opacity-40' : 'opacity-0'}`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-900/60 to-gray-800/50 z-10" />
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className={idx === 0 ? "object-cover object-[center_60%]" : "object-cover"}
+                priority={idx === 0}
+              />
+            </div>
+          ))}
+        </div>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
@@ -112,133 +112,134 @@ export default function Home() {
       </section>
 
       {/* Project Overview */}
-      <section id="overview" className="py-12 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              Project Summary
-            </h2>
+<section id="overview" className="py-12 sm:py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+        Project Summary
+      </h2>
+    </div>
+{/* Hero Image - Artist Rendering - ADJUSTED SIZE */}
+<div className="relative h-[450px] sm:h-[500px] lg:h-[550px] rounded-2xl overflow-hidden mb-12 shadow-2xl">
+  <Image
+    src="/images/1-outside.jpg"
+    alt="1403 South Pearl Street - Artist Rendering"
+    fill
+    className="object-cover"
+    style={{ objectPosition: '50% 65%' }}
+  />
+  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+    <p className="text-white text-sm sm:text-base">1403 South Pearl Street - Artist Rendering</p>
+  </div>
+</div>
+
+    <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start mb-12">
+      <div>
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900">General Description</h3>
+        <div className="space-y-4 mb-8">
+          <p className="text-gray-600 leading-relaxed text-lg">
+            Liv1403 is a unique urban mixed-use project that will be providing high end, luxury residential
+            condominiums with additional street facing store front commercial retail space.
+          </p>
+        </div>
+
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Location</h3>
+        <div className="space-y-4 mb-8">
+          <p className="text-gray-600 leading-relaxed">
+            Class A+ high-impact, corner lot on Old South Pearl St. in the Platt Park neighborhood in Denver, Colorado.
+            Old South Pearl St. is a high value shopping and dining district located near the University of Denver. It
+            is known for its highly acclaimed shops, boutiques, and restaurants.
+          </p>
+        </div>
+
+        <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Permit Status</h3>
+        <div className="space-y-4">
+          <p className="text-gray-600 leading-relaxed">
+            Liv1403 construction permits have been approved and the project is shovel ready.
+          </p>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-lg">
+        <h4 className="font-bold text-gray-900 mb-6 text-xl">Building Specifications</h4>
+        <div className="grid grid-cols-2 gap-6 text-sm">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Address</div>
+            <div className="font-bold text-gray-900">1403 S Pearl ST</div>
           </div>
-
-          {/* Hero Image - Artist Rendering */}
-          <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-            <Image
-              src="/images/1-outside.jpg"
-              alt="1403 South Pearl Street - Artist Rendering"
-              fill
-              className="object-cover object-center"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-              <p className="text-white text-sm sm:text-base">1403 South Pearl Street - Artist Rendering</p>
-            </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Targeted Completion</div>
+            <div className="font-bold text-gray-900">5/15/2027</div>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-start mb-12">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900">General Description</h3>
-              <div className="space-y-4 mb-8">
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  Liv1403 is a unique urban mixed-use project that will be providing high end, luxury residential
-                  condominiums with additional street facing store front commercial retail space.
-                </p>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Location</h3>
-              <div className="space-y-4 mb-8">
-                <p className="text-gray-600 leading-relaxed">
-                  Class A+ high-impact, corner lot on Old South Pearl St. in the Platt Park neighborhood in Denver, Colorado.
-                  Old South Pearl St. is a high value shopping and dining district located near the University of Denver. It
-                  is known for its highly acclaimed shops, boutiques, and restaurants.
-                </p>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Permit Status</h3>
-              <div className="space-y-4">
-                <p className="text-gray-600 leading-relaxed">
-                  Liv1403 construction permits have been approved and the project is shovel ready.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-lg">
-              <h4 className="font-bold text-gray-900 mb-6 text-xl">Building Specifications</h4>
-              <div className="grid grid-cols-2 gap-6 text-sm">
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Address</div>
-                  <div className="font-bold text-gray-900">1403 S Pearl ST</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Targeted Completion</div>
-                  <div className="font-bold text-gray-900">5/15/2027</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Residential Units</div>
-                  <div className="font-bold text-gray-900 text-2xl">6</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Residential SF</div>
-                  <div className="font-bold text-gray-900 text-2xl">8,576</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Retail SF</div>
-                  <div className="font-bold text-gray-900">482 SF</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Zoning</div>
-                  <div className="font-bold text-gray-900">UMX-2</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Total Land</div>
-                  <div className="font-bold text-gray-900">6,250 SF</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Levels</div>
-                  <div className="font-bold text-gray-900">4</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Private Rooftop Deck</div>
-                  <div className="font-bold text-gray-900">4,638 SF</div>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <div className="text-gray-500 text-xs mb-1">Gross Build</div>
-                  <div className="font-bold text-gray-900">10,370 SF</div>
-                </div>
-              </div>
-            </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Residential Units</div>
+            <div className="font-bold text-gray-900 text-2xl">6</div>
           </div>
-
-          {/* Previous Projects Gallery */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl group">
-              <Image
-                src="/images/7-multifamily.jpg"
-                alt="Previous Multi-family Project - Sloans Lake, Denver"
-                fill
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-white text-sm font-medium">Previous Multi-family Project - Sloans Lake, Denver</p>
-              </div>
-            </div>
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl group">
-              <Image
-                src="/images/8-interior.jpg"
-                alt="Previous Project - Highlands, Denver"
-                fill
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-white text-sm font-medium">Previous Project - Highlands, Denver</p>
-              </div>
-            </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Residential SF</div>
+            <div className="font-bold text-gray-900 text-2xl">8,576</div>
           </div>
-
-          <div className="mt-6 text-xs text-gray-500 italic text-center bg-yellow-50 p-4 rounded-lg border border-yellow-100">
-            Target returns are estimates. Any actual returns may materially differ. Investing in the Company is high risk,
-            and you could lose all your investment. The Company does not guarantee any returns.
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Retail SF</div>
+            <div className="font-bold text-gray-900">482 SF</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Zoning</div>
+            <div className="font-bold text-gray-900">UMX-2</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Total Land</div>
+            <div className="font-bold text-gray-900">6,250 SF</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Levels</div>
+            <div className="font-bold text-gray-900">4</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Private Rooftop Deck</div>
+            <div className="font-bold text-gray-900">4,638 SF</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="text-gray-500 text-xs mb-1">Gross Build</div>
+            <div className="font-bold text-gray-900">10,370 SF</div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+
+    {/* Previous Projects Gallery */}
+    <div className="grid md:grid-cols-2 gap-6 mb-8">
+      <div className="relative h-80 rounded-xl overflow-hidden shadow-xl group">
+        <Image
+          src="/images/5-island.jpg"
+          alt="Previous Project - Highlands, Denver"
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          style={{ objectPosition: '50% 60%' }}
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+          <p className="text-white text-sm font-medium">Previous Multi-family Project - Sloans Lake, Denver</p>
+        </div>
+      </div>
+      <div className="relative h-80 rounded-xl overflow-hidden shadow-xl group">
+        <Image
+          src="/images/6-stairs.jpg"
+          alt="Previous Multi-family Project- Sloans Lake, Denver"
+          fill
+          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+          <p className="text-white text-sm font-medium">Previous Project - Highlands, Denver</p>
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-6 text-xs text-gray-500 italic text-center bg-yellow-50 p-4 rounded-lg border border-yellow-100">
+      Target returns are estimates. Any actual returns may materially differ. Investing in the Company is high risk,
+      and you could lose all your investment. The Company does not guarantee any returns.
+    </div>
+  </div>
+</section>
 
       {/* Value Overview */}
       <section id="value" className="py-12 sm:py-20 bg-gray-50">
@@ -249,24 +250,25 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Feature Image */}
-          <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden mb-12 shadow-2xl">
-            <Image
-              src="/images/9-darkoutside.png"
-              alt="1745 S. Pearl Street - 3 Blocks from Liv1403"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="text-white text-lg sm:text-xl font-semibold mb-2">
-                Previous Multi-family Project on Old South Pearl Street
-              </p>
-              <p className="text-white/90 text-sm">
-                1745 S. Pearl Street - 3 Blocks from Liv1403
-              </p>
-            </div>
-          </div>
+{/* Feature Image */}
+<div className="relative h-[450px] sm:h-[500px] lg:h-[550px] rounded-2xl overflow-hidden mb-12 shadow-2xl">
+  <Image
+    src="/images/9-darkoutside.png"
+    alt="1745 S. Pearl Street - 3 Blocks from Liv1403"
+    fill
+    className="object-cover"
+    style={{ objectPosition: '50% 65%' }}
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+  <div className="absolute bottom-0 left-0 right-0 p-8">
+    <p className="text-white text-lg sm:text-xl font-semibold mb-2">
+      Previous Multi-family Project on Old South Pearl Street
+    </p>
+    <p className="text-white/90 text-sm">
+      1745 S. Pearl Street - 3 Blocks from Liv1403
+    </p>
+  </div>
+</div>
 
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8">
             <div className="bg-white p-8 sm:p-10 rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow">
@@ -472,7 +474,7 @@ export default function Home() {
             </div>
             <div className="relative h-72 rounded-xl overflow-hidden shadow-lg group">
               <Image
-                src="/images/27-dinning.jpg"
+                src="/images/13-livingroom.jpg"
                 alt="Previous Multi-family Project - Sloans Lake, Denver"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -551,127 +553,143 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rooftop Deck */}
-      <section id="rooftop" className="py-12 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              Rooftop Deck
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Unique private rooftop decks with every condominium unit
-            </p>
+{/* Rooftop Deck */}
+<section id="rooftop" className="py-12 sm:py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+        Rooftop Deck
+      </h2>
+      <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+        Unique private rooftop decks with every condominium unit
+      </p>
+    </div>
+
+    {/* Hero Image - Full Width */}
+    <div className="relative h-[450px] sm:h-[500px] lg:h-[550px] rounded-2xl overflow-hidden shadow-2xl mb-12">
+      <Image
+        src="/images/rooftop-render2.jpg"
+        alt="Rooftop Deck Rendering"
+        fill
+        className="object-cover"
+        style={{ objectPosition: '50% 65%' }}
+      />
+    </div>
+
+    {/* Two Column Layout - Images Left, All Text Right */}
+    <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
+      {/* Left Column - Stacked Images */}
+      <div className="space-y-6">
+        <div className="relative h-96 rounded-xl overflow-hidden shadow-xl">
+          <Image
+            src="/images/14-bbq.jpg"
+            alt="Rooftop Deck Seating Area - Artist Rendering"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+            <p className="text-white text-sm font-medium">Artist Rendering</p>
           </div>
-
-          {/* Three Image Layout */}
-          <div className="grid gap-6 mb-12">
-            {/* First Image - Full Width */}
-            <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/rooftop-bbq.webp"
-                alt="THis is where rooftop rendering will go"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Two Images Side by Side */}
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
-                <Image
-                  src="/images/14-bbq.jpg"
-                  alt="Rooftop Deck Seating Area - Artist Rendering"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                  <p className="text-white text-sm font-medium">Artist Rendering</p>
-                </div>
-              </div>
-              <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
-                <Image
-                  src="/images/16-rooftop.jpg"
-                  alt="Previous Multi-family Project - Sloans Lake, Denver"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                  <p className="text-white text-sm font-medium">Previous Multi-family Project - Sloans Lake, Denver</p>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div className="relative h-96 rounded-xl overflow-hidden shadow-xl">
+          <Image
+            src="/images/16-rooftop.jpg"
+            alt="Previous Multi-family Project - Sloans Lake, Denver"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+            <p className="text-white text-sm font-medium">Previous Multi-family Project - Sloans Lake, Denver</p>
           </div>
+        </div>
+      </div>
 
-          {/* Feature Cards in 2x3 Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Elevated Living</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Open-air rooftop decks can positively impact daily quality of life. Liv1403 offers unique rooftop decks
-                with every condominium unit. Each deck includes: full kitchen, fire pit, water feature, pet-friendly
-                synthetic turf, pergola, maintenance-free decking.
-              </p>
+      {/* Right Column - All Feature Cards Stacked */}
+      <div className="space-y-6">
+        <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-lg">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
             </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Year-Round Usability</h3>
+            <div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Elevated Living</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Fortunately, in Denver, blue skies and warm temperatures of 50+ degree days can occur frequently
-                through the coldest months of the winter.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Skyline Views</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Expansive, unobstructed views stretch from the Denver skyline to the Rocky Mountains, a rare vantage
-                point in the Old South Pearl neighborhood.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Private Retreat</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Private rooftop decks can provide immediate solitude to focus and recharge, and views to take in and
-                relax by. Convenience to the outdoors without having to leave your home.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">Pet Owner Benefit</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Pet owners enjoy the ability to provide exercise and relief at a second's notice.
+                Open-air rooftop decks can positively impact daily quality of life. Each deck includes: full kitchen, fire pit, water feature, pet-friendly synthetic turf, pergola, and maintenance-free decking.
               </p>
             </div>
           </div>
         </div>
-      </section>
+
+        <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-lg">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Year-Round Usability</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                In Denver, blue skies and warm 50+ degree temperatures occur frequently even through the coldest winter months.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-lg">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Skyline Views</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Expansive, unobstructed views stretch from the Denver skyline to the Rocky Mountains, a rare vantage point in the Old South Pearl neighborhood.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-lg">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Private Retreat</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Private rooftop decks provide immediate solitude to focus and recharge. Convenience to the outdoors without having to leave your home.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 shadow-lg">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Pet Owner Benefit</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Pet owners enjoy the ability to provide exercise and relief at a second's notice with convenient rooftop access.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Corner Lot Advantage - NEW SECTION */}
       <section id="corner-lot" className="py-12 sm:py-20 bg-gray-50">
@@ -690,7 +708,7 @@ export default function Home() {
             {/* Corner Location Map */}
             <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/images/1-outside.jpg"
+                src="/images/9-darkoutside.png"
                 alt="Corner Lot Location - Aerial View"
                 fill
                 className="object-cover"
@@ -703,13 +721,13 @@ export default function Home() {
             {/* Artist Rendering */}
             <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/images/hero.png"
+                src="/images/28-diffmap.png"
                 alt="Corner Lot Location Map"
                 fill
-                className="object-cover"
+                className="object-cover object-right-top"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white text-sm font-medium">Corner Lot Location Map *Placeholder*</p>
+                <p className="text-white text-sm font-medium">Corner Lot Location Map</p>
               </div>
             </div>
           </div>
@@ -782,127 +800,121 @@ export default function Home() {
           <div className="relative h-96 sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-pink-500/30 mix-blend-overlay z-10" />
             <Image
-              src="/images/19-skyline.jpg"
+              src="/images/rooftop-render.jpg"
               alt="Denver Skyline with Mountain Views"
               fill
               className="object-cover"
             />
             <div className="absolute bottom-0 left-0 right-0 p-8 z-20 bg-gradient-to-t from-black/80 to-transparent">
-              <p className="text-white text-lg sm:text-xl font-semibold mb-2">
-                Unobstructed Views
-              </p>
               <p className="text-white/90 text-sm">
-                Expansive views from the Denver skyline to the Rocky Mountains
-              </p>
+                1403 S. Peal St- Artist Rendering              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Location & Neighborhood */}
-      <section id="location" className="py-12 sm:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-              South Pearl St Community
-            </h2>
-          </div>
+<section id="location" className="py-12 sm:py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="text-center mb-12 sm:mb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+        South Pearl St Community
+      </h2>
+    </div>
 
-          {/* Feature Images */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/21-pearlSt.webp"
-                alt="Old South Pearl Street Sign"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white text-sm font-medium">Old South Pearl Street</p>
-              </div>
-            </div>
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
-              <Image
-                src="/images/22-market.jpg"
-                alt="South Pearl Street Farmers Market"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white text-sm font-medium">South Pearl Street Farmers Market</p>
-              </div>
-            </div>
-          </div>
+    {/* Feature Images */}
+    <div className="grid md:grid-cols-2 gap-6 mb-12">
+      <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
+        <Image
+          src="/images/21-pearlSt.webp"
+          alt="Old South Pearl Street Sign"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+          <p className="text-white text-sm font-medium">Old South Pearl Street</p>
+        </div>
+      </div>
+      <div className="relative h-80 rounded-xl overflow-hidden shadow-xl">
+        <Image
+          src="/images/22-market.jpg"
+          alt="South Pearl Street Farmers Market"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+          <p className="text-white text-sm font-medium">South Pearl Street Farmers Market</p>
+        </div>
+      </div>
+    </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-12">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Neighborhood Life</h3>
+    <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
+      {/* Left Column - Text Content */}
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Neighborhood Life</h3>
+          <p className="text-gray-600 leading-relaxed text-lg">
+            South Pearl Street is one of Denver's most historic and vibrant shopping districts. Spanning Buchtel to
+            Jewell Avenues, its tree-lined blocks offer a charming alternative to malls, featuring unique local
+            shops, top-rated restaurants, lively nightspots, and year-round community events that draw visitors
+            and locals alike.
+          </p>
+        </div>
 
-              <div className="space-y-6 mb-8">
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  South Pearl Street is one of Denver's most historic and vibrant shopping districts. Spanning Buchtel to
-                  Jewell Avenues, its tree-lined blocks offer a charming alternative to malls, featuring unique local
-                  shops, top-rated restaurants, lively nightspots, and year-round community events that draw visitors
-                  and locals alike.
-                </p>
-              </div>
+        <div>
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Sunday Farmers Market</h3>
+          <p className="text-gray-600 leading-relaxed">
+            With live music and a warm, welcoming spirit, the South Pearl Street Farmers Market supports and
+            enhances the surrounding community with a great variety of fresh and wholesome products.
+          </p>
+        </div>
 
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Sunday Farmers Market</h3>
+        <div>
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">History</h3>
+          <p className="text-gray-600 leading-relaxed">
+            Old South Pearl Street in Denver, established in 1893, has evolved into a vibrant destination. Once a
+            hub for artisans and merchants, it now boasts trendy boutiques, acclaimed restaurants like Sushi
+            Den, lively music festivals, and a thriving farmers' market, making it a beloved community
+            centerpiece.
+          </p>
+        </div>
 
-              <div className="space-y-6 mb-8">
-                <p className="text-gray-600 leading-relaxed">
-                  With live music and a warm, welcoming spirit, the South Pearl Street Farmers Market supports and
-                  enhances the surrounding community with a great variety of fresh and wholesome products.
-                </p>
-              </div>
-
-              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">History</h3>
-
-              <div className="space-y-6">
-                <p className="text-gray-600 leading-relaxed">
-                  Old South Pearl Street in Denver, established in 1893, has evolved into a vibrant destination. Once a
-                  hub for artisans and merchants, it now boasts trendy boutiques, acclaimed restaurants like Sushi
-                  Den, lively music festivals, and a thriving farmers' market, making it a beloved community
-                  centerpiece.
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-gray-200 shadow-xl">
-                <h4 className="font-bold text-xl mb-6 text-gray-900">Location Map</h4>
-                <div className="relative h-96 rounded-xl overflow-hidden shadow-lg mb-6">
-                  <Image
-                    src="/images/map.jpg"
-                    alt="1403 S Pearl Street Location Map - Old South Pearl Retail and Entertainment District"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="text-sm text-gray-600 space-y-2 bg-gray-50 p-4 rounded-lg">
-                  <div className="font-bold text-gray-900 text-base">1403 S. Pearl Street</div>
-                  <div>Denver, Colorado</div>
-                  <div>Platt Park / Old South Pearl Neighborhood</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Historic Photo */}
-          {/* Historic Photo */}
-          <div className="relative h-80 sm:h-96 md:h-[500px] rounded-xl overflow-hidden shadow-xl">
-            <Image
-              src="/images/23-history.jpg"
-              alt="Historic Old South Pearl Street Photo (1893)"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-              <p className="text-white text-sm font-medium">Historic Old South Pearl Street (1893)</p>
-            </div>
+        {/* Historic Photo - Now in left column */}
+        <div className="relative h-64 rounded-xl overflow-hidden shadow-xl">
+          <Image
+            src="/images/23-history.jpg"
+            alt="Historic Old South Pearl Street Photo (1893)"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+            <p className="text-white text-sm font-medium">Historic Old South Pearl Street (1893)</p>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Right Column - Location Map */}
+      <div>
+        <div className="bg-white p-6 sm:p-8 rounded-2xl border-2 border-gray-200 shadow-xl sticky top-8">
+          <h4 className="font-bold text-xl mb-6 text-gray-900">Location Map</h4>
+          <div className="relative h-[36rem] rounded-xl overflow-hidden shadow-lg mb-6">
+            <Image
+              src="/images/17-cornerlot.jpg"
+              alt="1403 S Pearl Street Location Map - Old South Pearl Retail and Entertainment District"
+              fill
+              className="object-contain bg-slate-100"
+            />
+          </div>
+          <div className="text-sm text-gray-600 space-y-2 bg-gray-50 p-4 rounded-lg">
+            <div className="font-bold text-gray-900 text-base">1403 S. Pearl Street</div>
+            <div>Denver, Colorado</div>
+            <div>Platt Park / Old South Pearl Neighborhood</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* South Pearl St Highlights */}
       <section id="highlights" className="py-12 sm:py-20 bg-white">
