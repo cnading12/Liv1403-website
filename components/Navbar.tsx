@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,37 +12,42 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-6 py-2">
         <div className="flex items-center justify-between">
-          {/* Logo and Title */}
-          <div className="flex items-center space-x-3">
-            <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-              Liv 1403
-            </Link>
-            <div className="text-sm text-gray-600 hidden md:block">Luxury Development</div>
-          </div>
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <div className="relative h-16 w-40">
+              <Image
+                src="/images/logo.png"
+                alt="Liv1403 Logo"
+                fill
+                className="object-contain object-left"
+                priority
+              />
+            </div>
+          </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {isHomePage ? (
               <>
                 <a 
-                  href="#executive-summary" 
+                  href="#overview" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
-                  Overview
+                  Project
+                </a>
+                <a 
+                  href="#design" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Design
                 </a>
                 <a 
                   href="#location" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
                   Location
-                </a>
-                <a 
-                  href="#financials" 
-                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-                >
-                  Financials
                 </a>
                 <a 
                   href="#contact" 
@@ -53,22 +59,22 @@ export default function Navbar() {
             ) : (
               <>
                 <Link 
-                  href="/#executive-summary" 
+                  href="/#overview" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
-                  Overview
+                  Project
+                </Link>
+                <Link 
+                  href="/#design" 
+                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                >
+                  Design
                 </Link>
                 <Link 
                   href="/#location" 
                   className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
                 >
                   Location
-                </Link>
-                <Link 
-                  href="/#financials" 
-                  className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
-                >
-                  Financials
                 </Link>
                 <Link 
                   href="/#contact" 
@@ -134,11 +140,18 @@ export default function Navbar() {
               {isHomePage ? (
                 <>
                   <a
-                    href="#executive-summary"
+                    href="#overview"
                     className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Overview
+                    Project
+                  </a>
+                  <a
+                    href="#design"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Design
                   </a>
                   <a
                     href="#location"
@@ -148,28 +161,28 @@ export default function Navbar() {
                     Location
                   </a>
                   <a
-                    href="#financials"
+                    href="#contact"
                     className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Financials
-                  </a>
-                  <a
-                    href="#investment"
-                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Investment
+                    Contact
                   </a>
                 </>
               ) : (
                 <>
                   <Link
-                    href="/#executive-summary"
+                    href="/#overview"
                     className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Overview
+                    Project
+                  </Link>
+                  <Link
+                    href="/#design"
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Design
                   </Link>
                   <Link
                     href="/#location"
@@ -179,18 +192,11 @@ export default function Navbar() {
                     Location
                   </Link>
                   <Link
-                    href="/#financials"
+                    href="/#contact"
                     className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Financials
-                  </Link>
-                  <Link
-                    href="/#investment"
-                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium px-2 py-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Investment
+                    Contact
                   </Link>
                 </>
               )}
