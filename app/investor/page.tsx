@@ -26,6 +26,7 @@ export default function InvestmentPortal() {
   });
 
   const [buyerApplications, setBuyerApplications] = useState([]);
+  const [processingAppId, setProcessingAppId] = useState(null);
 
   // Check for existing token on page load
   useEffect(() => {
@@ -49,8 +50,7 @@ export default function InvestmentPortal() {
     if (showAdminPanel && currentUser?.role === 'admin') {
       fetchApplications();
       fetchUsers();
-      fetchBuyerApplications(); // Add this line
-
+      fetchBuyerApplications();
     }
   }, [showAdminPanel, currentUser]);
 
@@ -159,12 +159,16 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleApproveApplication = async (id) => {
+  const handleApproveApplication = async (id, isInvestor = true) => {
     if (!confirm('Approve and create user account?')) return;
+
+    setProcessingAppId(id);
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/applications/admin', {
+      const endpoint = isInvestor ? '/api/applications/admin' : '/api/applications/buyer/admin';
+      
+      const response = await fetch(endpoint, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -179,25 +183,33 @@ export default function InvestmentPortal() {
 
       const data = await response.json();
 
-      if (response.ok) {
-        alert(`Approved! Temp password: ${data.temp_password}`);
-        fetchApplications();
-        fetchUsers();
+      if (response.ok && data.success) {
+        alert(`Approved! Temp password: ${data.temp_password}\n\nPlease copy this password and send it to the ${isInvestor ? 'investor' : 'buyer'}.`);
+        await Promise.all([
+          isInvestor ? fetchApplications() : fetchBuyerApplications(),
+          fetchUsers()
+        ]);
       } else {
         alert(data.error || 'Failed to approve application');
       }
     } catch (error) {
       console.error('Error approving application:', error);
       alert('Network error. Please try again.');
+    } finally {
+      setProcessingAppId(null);
     }
   };
 
-  const handleRejectApplication = async (id) => {
+  const handleRejectApplication = async (id, isInvestor = true) => {
     if (!confirm('Reject this application?')) return;
+
+    setProcessingAppId(id);
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/applications/admin', {
+      const endpoint = isInvestor ? '/api/applications/admin' : '/api/applications/buyer/admin';
+      
+      const response = await fetch(endpoint, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -209,41 +221,51 @@ export default function InvestmentPortal() {
         }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         alert('Application rejected');
-        fetchApplications();
+        await (isInvestor ? fetchApplications() : fetchBuyerApplications());
       } else {
-        const data = await response.json();
         alert(data.error || 'Failed to reject application');
       }
     } catch (error) {
       console.error('Error rejecting application:', error);
       alert('Network error. Please try again.');
+    } finally {
+      setProcessingAppId(null);
     }
   };
 
-  const handleDeleteApplication = async (id) => {
+  const handleDeleteApplication = async (id, isInvestor = true) => {
     if (!confirm('Delete permanently?')) return;
+
+    setProcessingAppId(id);
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/applications/admin?id=${id}`, {
+      const endpoint = isInvestor ? '/api/applications/admin' : '/api/applications/buyer/admin';
+      
+      const response = await fetch(`${endpoint}?id=${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         alert('Deleted');
-        fetchApplications();
+        await (isInvestor ? fetchApplications() : fetchBuyerApplications());
       } else {
-        const data = await response.json();
         alert(data.error || 'Failed to delete application');
       }
     } catch (error) {
       console.error('Error deleting application:', error);
       alert('Network error. Please try again.');
+    } finally {
+      setProcessingAppId(null);
     }
   };
 
@@ -532,67 +554,154 @@ export default function InvestmentPortal() {
       {showAdminPanel && currentUser.role === 'admin' ? (
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="space-y-6">
-            {/* Applications Section */}
+            {/* Investor Applications Section */}
             <div className="bg-white rounded-xl border border-gray-200 p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Investor Applications</h2>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Name</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Email</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Phone</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Investment</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Status</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {applications.map((app, index) => (
-                      <tr key={app.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                        <td className="px-4 py-3 text-sm text-gray-900">{app.full_name}</td>
-                        <td className="px-4 py-3 text-sm text-gray-900">{app.email}</td>
-                        <td className="px-4 py-3 text-sm text-gray-900">{app.phone}</td>
-                        <td className="px-4 py-3 text-sm text-gray-900">{app.investment_amount}</td>
-                        <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${app.status === 'approved' ? 'bg-green-100 text-green-800' :
-                              app.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                                'bg-yellow-100 text-yellow-800'
-                            }`}>
-                            {app.status}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-sm">
-                          <div className="flex space-x-2">
-                            {app.status === 'pending' && (
-                              <>
-                                <button
-                                  onClick={() => handleApproveApplication(app.id)}
-                                  className="px-3 py-1 rounded text-xs bg-green-100 text-green-800 hover:bg-green-200"
-                                >
-                                  Approve
-                                </button>
-                                <button
-                                  onClick={() => handleRejectApplication(app.id)}
-                                  className="px-3 py-1 rounded text-xs bg-red-100 text-red-800 hover:bg-red-200"
-                                >
-                                  Reject
-                                </button>
-                              </>
-                            )}
-                            <button
-                              onClick={() => handleDeleteApplication(app.id)}
-                              className="px-3 py-1 rounded text-xs bg-gray-100 text-gray-800 hover:bg-gray-200"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
+              {applications.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">No investor applications yet</div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Name</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Email</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Phone</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Investment</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Status</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Actions</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {applications.map((app, index) => (
+                        <tr key={app.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.full_name}</td>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.email}</td>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.phone}</td>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.investment_amount}</td>
+                          <td className="px-4 py-3 text-sm">
+                            <span className={`px-2 py-1 rounded-full text-xs ${
+                              app.status === 'approved' ? 'bg-green-100 text-green-800' :
+                              app.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                              'bg-yellow-100 text-yellow-800'
+                            }`}>
+                              {app.status}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-sm">
+                            <div className="flex space-x-2">
+                              {app.status === 'pending' && (
+                                <>
+                                  <button
+                                    onClick={() => handleApproveApplication(app.id, true)}
+                                    disabled={processingAppId === app.id}
+                                    className="px-3 py-1 rounded text-xs bg-green-100 text-green-800 hover:bg-green-200 disabled:opacity-50"
+                                  >
+                                    {processingAppId === app.id ? 'Processing...' : 'Approve'}
+                                  </button>
+                                  <button
+                                    onClick={() => handleRejectApplication(app.id, true)}
+                                    disabled={processingAppId === app.id}
+                                    className="px-3 py-1 rounded text-xs bg-red-100 text-red-800 hover:bg-red-200 disabled:opacity-50"
+                                  >
+                                    Reject
+                                  </button>
+                                </>
+                              )}
+                              <button
+                                onClick={() => handleDeleteApplication(app.id, true)}
+                                disabled={processingAppId === app.id}
+                                className="px-3 py-1 rounded text-xs bg-gray-100 text-gray-800 hover:bg-gray-200 disabled:opacity-50"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+
+            {/* Buyer Applications Section - NEW */}
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Buyer Applications</h2>
+              {buyerApplications.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">No buyer applications yet</div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-blue-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Name</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Email</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Phone</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Interested Units</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Pre-Qualified</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Status</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {buyerApplications.map((app, index) => (
+                        <tr key={app.id} className={index % 2 === 0 ? 'bg-white' : 'bg-blue-50/30'}>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.full_name}</td>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.email}</td>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.phone}</td>
+                          <td className="px-4 py-3 text-sm text-gray-900">{app.interested_units || 'Not specified'}</td>
+                          <td className="px-4 py-3 text-sm">
+                            <span className={`px-2 py-1 rounded-full text-xs ${
+                              app.pre_qualified ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                            }`}>
+                              {app.pre_qualified ? 'Yes' : 'No'}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-sm">
+                            <span className={`px-2 py-1 rounded-full text-xs ${
+                              app.status === 'approved' ? 'bg-green-100 text-green-800' :
+                              app.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                              'bg-yellow-100 text-yellow-800'
+                            }`}>
+                              {app.status}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-sm">
+                            <div className="flex space-x-2">
+                              {app.status === 'pending' && (
+                                <>
+                                  <button
+                                    onClick={() => handleApproveApplication(app.id, false)}
+                                    disabled={processingAppId === app.id}
+                                    className="px-3 py-1 rounded text-xs bg-green-100 text-green-800 hover:bg-green-200 disabled:opacity-50"
+                                  >
+                                    {processingAppId === app.id ? 'Processing...' : 'Approve'}
+                                  </button>
+                                  <button
+                                    onClick={() => handleRejectApplication(app.id, false)}
+                                    disabled={processingAppId === app.id}
+                                    className="px-3 py-1 rounded text-xs bg-red-100 text-red-800 hover:bg-red-200 disabled:opacity-50"
+                                  >
+                                    Reject
+                                  </button>
+                                </>
+                              )}
+                              <button
+                                onClick={() => handleDeleteApplication(app.id, false)}
+                                disabled={processingAppId === app.id}
+                                className="px-3 py-1 rounded text-xs bg-gray-100 text-gray-800 hover:bg-gray-200 disabled:opacity-50"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
 
             {/* User Management Section */}
@@ -625,14 +734,18 @@ export default function InvestmentPortal() {
                         <td className="px-4 py-3 text-sm text-gray-900">{user.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-900">{user.email}</td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'
-                            }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs ${
+                            user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 
+                            user.role === 'buyer' ? 'bg-blue-100 text-blue-800' :
+                            'bg-green-100 text-green-800'
+                          }`}>
                             {user.role}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                            }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs ${
+                            user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                          }`}>
                             {user.status}
                           </span>
                         </td>
@@ -643,10 +756,11 @@ export default function InvestmentPortal() {
                           <div className="flex space-x-2">
                             <button
                               onClick={() => handleToggleUserStatus(user.id)}
-                              className={`px-3 py-1 rounded text-xs ${user.status === 'active'
+                              className={`px-3 py-1 rounded text-xs ${
+                                user.status === 'active'
                                   ? 'bg-red-100 text-red-800 hover:bg-red-200'
                                   : 'bg-green-100 text-green-800 hover:bg-green-200'
-                                }`}
+                              }`}
                             >
                               {user.status === 'active' ? 'Deactivate' : 'Activate'}
                             </button>
@@ -699,6 +813,7 @@ export default function InvestmentPortal() {
                           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                         >
                           <option value="investor">Investor</option>
+                          <option value="buyer">Buyer</option>
                           <option value="admin">Admin</option>
                         </select>
                       </div>
@@ -745,6 +860,7 @@ export default function InvestmentPortal() {
         </div>
       ) : (
         <>
+          {/* REST OF THE INVESTOR CONTENT TABS - Keeping exactly as is */}
           <div className="bg-white border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-6">
               <nav className="flex space-x-8">

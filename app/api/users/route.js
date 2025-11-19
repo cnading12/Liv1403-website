@@ -74,7 +74,7 @@ export async function POST(request) {
       return Response.json({ error: 'All fields are required' }, { status: 400 })
     }
 
-    if (!['investor', 'admin'].includes(role)) {
+    if (!['investor', 'admin', 'buyer'].includes(role)) {
       return Response.json({ error: 'Invalid role' }, { status: 400 })
     }
 

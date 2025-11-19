@@ -37,3 +37,34 @@ body {
 body, button, a {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Add this to your app/globals.css file to fix the scrollbar */
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* Light gray */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* Darker gray on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f1f1f1; /* thumb color, track color */
+}
+
+/* Remove any orange/yellow scrollbar colors */
+html {
+  scrollbar-color: #d1d5db #f1f1f1 !important;
+}

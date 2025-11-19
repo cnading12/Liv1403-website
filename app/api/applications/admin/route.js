@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
-import { supabaseAdmin } from '../../../../lib/supabase'
-
+import { supabaseAdmin } from '@/lib/supabase' 
 // Helper function to verify JWT and get user
 async function verifyAuth(request) {
   try {
@@ -111,6 +110,9 @@ export async function PATCH(request) {
       updateData.admin_notes = admin_notes
     }
 
+    // Variable to store temp password for response
+    let tempPassword = null
+
     // If approving and creating user
     if (create_user && status === 'approved') {
       // Check if user already exists
@@ -136,7 +138,7 @@ export async function PATCH(request) {
         return password
       }
 
-      const tempPassword = generatePassword()
+      tempPassword = generatePassword()
       const passwordHash = await bcrypt.hash(tempPassword, 12)
 
       // Create user
@@ -178,12 +180,9 @@ export async function PATCH(request) {
         email: newUser.email,
         temp_password: tempPassword // In production, this would be emailed
       })
-
-      // Include password in response for now (in production, email it instead)
-      updateData.temp_password = tempPassword
     }
 
-    // Update application
+    // Update application (don't include temp_password in database update)
     const { data: updatedApplication, error: updateError } = await supabaseAdmin
       .from('investor_applications')
       .update(updateData)
@@ -220,8 +219,8 @@ export async function PATCH(request) {
     }
 
     // Include temporary password if user was created
-    if (updateData.temp_password) {
-      response.temp_password = updateData.temp_password
+    if (tempPassword) {
+      response.temp_password = tempPassword
       response.message = 'Application approved and user account created successfully'
     }
 
