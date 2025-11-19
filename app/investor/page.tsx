@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { User } from '@/types/user';
 
 export default function InvestmentPortal() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [email, setEmail] = useState('');
+  const [currentUser, setCurrentUser] = useState<User | null>(null); const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,8 +26,7 @@ export default function InvestmentPortal() {
   });
 
   const [buyerApplications, setBuyerApplications] = useState([]);
-  const [processingAppId, setProcessingAppId] = useState(null);
-
+  const [processingAppId, setProcessingAppId] = useState<string | null>(null);
   // Check for existing token on page load
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -54,7 +53,7 @@ export default function InvestmentPortal() {
     }
   }, [showAdminPanel, currentUser]);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!hasAgreedToDisclaimer) {
@@ -159,7 +158,7 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleApproveApplication = async (id, isInvestor = true) => {
+  const handleApproveApplication = async (id: string, isInvestor = true) => {
     if (!confirm('Approve and create user account?')) return;
 
     setProcessingAppId(id);
@@ -167,7 +166,7 @@ export default function InvestmentPortal() {
     try {
       const token = localStorage.getItem('token');
       const endpoint = isInvestor ? '/api/applications/admin' : '/api/applications/buyer/admin';
-      
+
       const response = await fetch(endpoint, {
         method: 'PATCH',
         headers: {
@@ -208,7 +207,7 @@ export default function InvestmentPortal() {
     try {
       const token = localStorage.getItem('token');
       const endpoint = isInvestor ? '/api/applications/admin' : '/api/applications/buyer/admin';
-      
+
       const response = await fetch(endpoint, {
         method: 'PATCH',
         headers: {
@@ -245,7 +244,7 @@ export default function InvestmentPortal() {
     try {
       const token = localStorage.getItem('token');
       const endpoint = isInvestor ? '/api/applications/admin' : '/api/applications/buyer/admin';
-      
+
       const response = await fetch(`${endpoint}?id=${id}`, {
         method: 'DELETE',
         headers: {
@@ -580,11 +579,10 @@ export default function InvestmentPortal() {
                           <td className="px-4 py-3 text-sm text-gray-900">{app.phone}</td>
                           <td className="px-4 py-3 text-sm text-gray-900">{app.investment_amount}</td>
                           <td className="px-4 py-3 text-sm">
-                            <span className={`px-2 py-1 rounded-full text-xs ${
-                              app.status === 'approved' ? 'bg-green-100 text-green-800' :
+                            <span className={`px-2 py-1 rounded-full text-xs ${app.status === 'approved' ? 'bg-green-100 text-green-800' :
                               app.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                              'bg-yellow-100 text-yellow-800'
-                            }`}>
+                                'bg-yellow-100 text-yellow-800'
+                              }`}>
                               {app.status}
                             </span>
                           </td>
@@ -652,18 +650,16 @@ export default function InvestmentPortal() {
                           <td className="px-4 py-3 text-sm text-gray-900">{app.phone}</td>
                           <td className="px-4 py-3 text-sm text-gray-900">{app.interested_units || 'Not specified'}</td>
                           <td className="px-4 py-3 text-sm">
-                            <span className={`px-2 py-1 rounded-full text-xs ${
-                              app.pre_qualified ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                            }`}>
+                            <span className={`px-2 py-1 rounded-full text-xs ${app.pre_qualified ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                              }`}>
                               {app.pre_qualified ? 'Yes' : 'No'}
                             </span>
                           </td>
                           <td className="px-4 py-3 text-sm">
-                            <span className={`px-2 py-1 rounded-full text-xs ${
-                              app.status === 'approved' ? 'bg-green-100 text-green-800' :
+                            <span className={`px-2 py-1 rounded-full text-xs ${app.status === 'approved' ? 'bg-green-100 text-green-800' :
                               app.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                              'bg-yellow-100 text-yellow-800'
-                            }`}>
+                                'bg-yellow-100 text-yellow-800'
+                              }`}>
                               {app.status}
                             </span>
                           </td>
@@ -734,18 +730,16 @@ export default function InvestmentPortal() {
                         <td className="px-4 py-3 text-sm text-gray-900">{user.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-900">{user.email}</td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 
+                          <span className={`px-2 py-1 rounded-full text-xs ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' :
                             user.role === 'buyer' ? 'bg-blue-100 text-blue-800' :
-                            'bg-green-100 text-green-800'
-                          }`}>
+                              'bg-green-100 text-green-800'
+                            }`}>
                             {user.role}
                           </span>
                         </td>
                         <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                          }`}>
+                          <span className={`px-2 py-1 rounded-full text-xs ${user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                            }`}>
                             {user.status}
                           </span>
                         </td>
@@ -756,11 +750,10 @@ export default function InvestmentPortal() {
                           <div className="flex space-x-2">
                             <button
                               onClick={() => handleToggleUserStatus(user.id)}
-                              className={`px-3 py-1 rounded text-xs ${
-                                user.status === 'active'
-                                  ? 'bg-red-100 text-red-800 hover:bg-red-200'
-                                  : 'bg-green-100 text-green-800 hover:bg-green-200'
-                              }`}
+                              className={`px-3 py-1 rounded text-xs ${user.status === 'active'
+                                ? 'bg-red-100 text-red-800 hover:bg-red-200'
+                                : 'bg-green-100 text-green-800 hover:bg-green-200'
+                                }`}
                             >
                               {user.status === 'active' ? 'Deactivate' : 'Activate'}
                             </button>
@@ -867,8 +860,8 @@ export default function InvestmentPortal() {
                 <button
                   onClick={() => setActiveTab('dashboard')}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'dashboard'
-                      ? 'border-yellow-600 text-yellow-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-yellow-600 text-yellow-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                 >
                   Investment Dashboard
@@ -876,8 +869,8 @@ export default function InvestmentPortal() {
                 <button
                   onClick={() => setActiveTab('financials')}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'financials'
-                      ? 'border-yellow-600 text-yellow-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-yellow-600 text-yellow-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                 >
                   Financial Details
@@ -885,8 +878,8 @@ export default function InvestmentPortal() {
                 <button
                   onClick={() => setActiveTab('documents')}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'documents'
-                      ? 'border-yellow-600 text-yellow-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-yellow-600 text-yellow-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                 >
                   Documents
@@ -894,8 +887,8 @@ export default function InvestmentPortal() {
                 <button
                   onClick={() => setActiveTab('updates')}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'updates'
-                      ? 'border-yellow-600 text-yellow-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-yellow-600 text-yellow-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                 >
                   Project Updates
