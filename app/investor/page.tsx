@@ -199,7 +199,7 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleRejectApplication = async (id, isInvestor = true) => {
+  const handleRejectApplication = async (id: string, isInvestor = true) => {
     if (!confirm('Reject this application?')) return;
 
     setProcessingAppId(id);
@@ -236,7 +236,7 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleDeleteApplication = async (id, isInvestor = true) => {
+  const handleDeleteApplication = async (id: string, isInvestor = true) => {
     if (!confirm('Delete permanently?')) return;
 
     setProcessingAppId(id);
@@ -268,7 +268,7 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleAddUser = async (e) => {
+  const handleAddUser = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (users.find(u => u.email === newUser.email)) {
