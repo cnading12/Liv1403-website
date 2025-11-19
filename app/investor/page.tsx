@@ -3,9 +3,39 @@
 import { useState, useEffect } from 'react';
 import { User } from '@/types/user';
 
+// Add these interface definitions:
+interface Application {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  investment_amount: string;
+  status: string;
+}
+
+interface BuyerApplication {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  interested_units?: string;
+  pre_qualified: boolean;
+  status: string;
+}
+
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  last_login?: string;
+}
+
 export default function InvestmentPortal() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(null); const [email, setEmail] = useState('');
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -13,10 +43,9 @@ export default function InvestmentPortal() {
   const [hasAgreedToDisclaimer, setHasAgreedToDisclaimer] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
 
-  // Admin functionality state
-  const [applications, setApplications] = useState([]);
-  const [selectedApp, setSelectedApp] = useState(null);
-  const [users, setUsers] = useState([]);
+  // Admin functionality state - NOW WITH PROPER TYPES:
+  const [applications, setApplications] = useState<Application[]>([]);
+  const [users, setUsers] = useState<UserData[]>([]);
   const [showAddUser, setShowAddUser] = useState(false);
   const [newUser, setNewUser] = useState({
     email: '',
@@ -25,7 +54,7 @@ export default function InvestmentPortal() {
     password: ''
   });
 
-  const [buyerApplications, setBuyerApplications] = useState([]);
+  const [buyerApplications, setBuyerApplications] = useState<BuyerApplication[]>([]);
   const [processingAppId, setProcessingAppId] = useState<string | null>(null);
   // Check for existing token on page load
   useEffect(() => {
@@ -304,8 +333,8 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleDeleteUser = async (userId) => {
-    if (userId === currentUser.id) {
+  const handleDeleteUser = async (userId: String) => {
+    if (userId === currentUser?.id) {
       alert('You cannot delete your own account.');
       return;
     }
@@ -334,9 +363,9 @@ export default function InvestmentPortal() {
     }
   };
 
-  const handleToggleUserStatus = async (userId) => {
-    const user = users.find(u => u.id === userId);
-    const newStatus = user.status === 'active' ? 'inactive' : 'active';
+const handleToggleUserStatus = async (userId: string) => {
+  const user = users.find(u => u.id === userId);
+  const newStatus = user?.status === 'active' ? 'inactive' : 'active';
 
     try {
       const token = localStorage.getItem('token');
@@ -527,11 +556,11 @@ export default function InvestmentPortal() {
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Investor Portal</h1>
               <p className="text-gray-600 mt-1">
-                Welcome, {currentUser.name} • Liv 1403 - Confidential Investor Materials
+                Welcome, {currentUser?.name} • Liv 1403 - Confidential Investor Materials
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              {currentUser.role === 'admin' && (
+              {currentUser?.role === 'admin' && (
                 <button
                   onClick={() => setShowAdminPanel(!showAdminPanel)}
                   className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -550,7 +579,7 @@ export default function InvestmentPortal() {
         </div>
       </div>
 
-      {showAdminPanel && currentUser.role === 'admin' ? (
+      {showAdminPanel && currentUser?.role === 'admin' ? (
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="space-y-6">
             {/* Investor Applications Section */}
