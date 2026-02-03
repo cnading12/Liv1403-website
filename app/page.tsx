@@ -959,8 +959,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-gray-900">Nationally Acclaimed Restaurants</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
-                    Old South Pearl Street has become a culinary hotspot, now boasting two Michelin-starred gems:
-                    Kizaki for masterful sushi and Margot for innovative seasonal tasting menus.
+                    South Pearl Street has become a culinary hotspot, now boasting two Michelin-starred gems: Kizaki, known for masterful sushi, and Margot, celebrated for innovative seasonal tasting menus.
                   </p>
                 </div>
               </div>
@@ -974,12 +973,9 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Trader Joe's is Coming</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">Trader Joe's Is Coming</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
-                    Exciting news for future residents of Liv1403: in 2026, a brand-new Trader Joe's is scheduled to
-                    open just one block away. With its affordable organic options, specialty items, and
-                    neighborhood-friendly vibe, having Trader Joe's within walking distance adds everyday
-                    convenience and enhances the vibrant lifestyle of this sought-after Pearl Street location.
+                    According to a September 2024 Denver Post article, construction is set to break ground in 2026, and the new store will be unique in that it will be one of the few Trader Joe's locations with a liquor license. It will be located at the long-vacant former Bed Bath & Beyond location on S. Broadway, at the intersection of S. Broadway and E. Evans, which is one (1) block from the Old South Pearl retail and entertainment district.
                   </p>
                 </div>
                 <div className="relative h-64 md:h-full order-1 md:order-2">
@@ -1012,10 +1008,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-gray-900">Convenient Rapid Transit</h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
-                    Just blocks from Liv1403, the light rail station offers seamless access across the city-whether residents
-                    are commuting downtown, exploring Denver's many attractions, or catching a flight at DIA. This
-                    connectivity makes car-free living easy and adds comfortable convenience to an already prime
-                    location.
+                    Just blocks from Liv1403, a light rail station offers access across the metro area. Residents can use it to commute downtown, reach DIA, or explore beyond, making car-free or reduced-car living practical and enjoyable.
                   </p>
                 </div>
               </div>
@@ -1117,6 +1110,20 @@ export default function Home() {
               </div>
 
               <div>
+                <h3 className="font-bold text-gray-900 mb-2">Confidentiality</h3>
+                <p>
+                  This investment presentation is confidential and may not be reproduced, disseminated, quoted, or referred to, in whole or in part, without the prior written consent of the Company.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">No Representations or Warranties</h3>
+                <p>
+                  Neither the Company nor any of its affiliates makes any representations or warranties, express or implied, regarding the accuracy or completeness of the information provided herein, and nothing in this presentation is, or shall be relied on as, a promise or representation, whether as to the past or future.
+                </p>
+              </div>
+
+              <div>
                 <h3 className="font-bold text-gray-900 mb-2">Not an Offer to Sell Securities</h3>
                 <p className="uppercase">
                   THIS INVESTMENT PRESENTATION DOES NOT CONSTITUTE AN OFFER TO SELL, OR A SOLICITATION OF AN OFFER TO BUY,
@@ -1124,18 +1131,6 @@ export default function Home() {
                   ANY SECURITY. YOU SHOULD NOT USE ANY INFORMATION IN THIS INVESTMENT PRESENTATION AS THE BASIS FOR MAKING ANY
                   INVESTMENT-RELATED DECISION. THE TERMS SET FORTH HEREIN ARE SUBJECT TO CHANGE OR DELETION AT ANY TIME WITHOUT
                   NOTICE AND ARE QUALIFIED IN THEIR ENTIRETY BY THE COMPANY'S INVESTMENT DOCUMENTS.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Forward Looking Statements</h3>
-                <p>
-                  Certain information in this investment presentation is based on estimates, projections, and assumptions,
-                  including, without limitation, construction costs, labor and materials costs, the availability of
-                  governmental approvals and permits, values of assets that incorporate projected appreciation, cap rates,
-                  and other data, such as interest rates, population growth, and macro-economic conditions. Neither the
-                  Manager nor the Company provides any assurances that any estimate, projection, or assumption will prove
-                  to be accurate.
                 </p>
               </div>
 
@@ -1152,19 +1147,28 @@ export default function Home() {
               </div>
 
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Budgeted Amounts</h3>
+                <h3 className="font-bold text-gray-900 mb-2">Knowledge and Experience</h3>
                 <p>
-                  All budgeted amounts are estimates only and may materially differ in practice. Many construction costs
-                  are outside of the Company's control. Changes in budgeted costs may materially and negatively impact
-                  investor returns.
+                  Prospective investors are responsible for evaluating any investment in the Company and making an independent judgment whether the investment is suitable for them based on their own knowledge and experience (and/or the knowledge and experience of their advisors).
                 </p>
               </div>
 
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">Timeline</h3>
+                <h3 className="font-bold text-gray-900 mb-2">Data</h3>
                 <p>
-                  All future dates and anticipated milestones are estimates only. Actual timing may materially differ.
-                  The Company does not guarantee any future performance, results, or timeframes.
+                  All data is estimated and subject to revision, future update, and other change without notice.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">Forward Looking Statements</h3>
+                <p>
+                  Certain information in this investment presentation is based on estimates, projections, and assumptions,
+                  including, without limitation, construction costs, labor and materials costs, the availability of
+                  governmental approvals and permits, values of assets that incorporate projected appreciation, cap rates,
+                  and other data, such as interest rates, population growth, and macro-economic conditions. Neither the
+                  Manager nor the Company provides any assurances that any estimate, projection, or assumption will prove
+                  to be accurate.
                 </p>
               </div>
             </div>
