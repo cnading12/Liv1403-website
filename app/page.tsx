@@ -486,7 +486,7 @@ export default function Home() {
                   <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
                   <div>
                     <div className="font-bold text-gray-900 text-lg mb-2">Design & Craftsmanship</div>
-                    <div className="text-gray-600 leading-relaxed">Unique materials and designs providing superior value, woodwork, casework, cabinetry, solid slab surfaces, tile work, and walk-in custom closets</div>
+                    <div className="text-gray-600 leading-relaxed">Unique materials and designs providing superior value - including woodwork, casework, cabinetry, solid-slab surfaces, tile work, and walk-in custom closets.</div>
                   </div>
                 </div>
               </div>
@@ -518,7 +518,7 @@ export default function Home() {
                   <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
                   <div>
                     <div className="font-bold text-gray-900 text-lg mb-2">Comfort & Wellness</div>
-                    <div className="text-gray-600 leading-relaxed">Individual unit laundry, heating, air conditioning, infrared HEPA air filtration systems</div>
+                    <div className="text-gray-600 leading-relaxed">Individual unit laundry, heating, air conditioning, infrared HEPA air-filtration systems.</div>
                   </div>
                 </div>
               </div>
@@ -528,7 +528,7 @@ export default function Home() {
                   <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
                   <div>
                     <div className="font-bold text-gray-900 text-lg mb-2">Appliances & Fixtures</div>
-                    <div className="text-gray-600 leading-relaxed">Latest and best-in-class appliances, electrical fixtures, and plumbing fixtures</div>
+                    <div className="text-gray-600 leading-relaxed">Latest and best-in-class appliances and electrical and plumbing fixtures.</div>
                   </div>
                 </div>
               </div>
@@ -538,7 +538,7 @@ export default function Home() {
                   <div className="w-3 h-3 bg-yellow-600 rounded-full mt-2 flex-shrink-0"></div>
                   <div>
                     <div className="font-bold text-gray-900 text-lg mb-2">Parking</div>
-                    <div className="text-gray-600 leading-relaxed">Private underground garages, charging stations, storage and bike rack</div>
+                    <div className="text-gray-600 leading-relaxed">Private underground garages. Electric-vehicle charging stations. Storage and bike racks.</div>
                   </div>
                 </div>
               </div>
@@ -610,7 +610,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Elevated Living</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Open-air rooftop decks can positively impact daily quality of life. Each deck includes: full kitchen, fire pit, water feature, pet-friendly synthetic turf, pergola, and maintenance-free decking.
+                Open-air rooftop decks positively enhance daily quality of life. Liv1403 offers unique rooftop decks with every condominium unit. Each deck includes a full kitchen, fire pit, water feature, pet-friendly synthetic turf, pergola, and maintenance-free decking.
               </p>
             </div>
           </div>
@@ -626,7 +626,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Year-Round Usability</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                In Denver, blue skies and warm 50+ degree temperatures occur frequently even through the coldest winter months.
+                In Denver, blue skies and warm temperatures of 50+ degree days can occur frequently, even during the coldest months of the winter.
               </p>
             </div>
           </div>
@@ -643,7 +643,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Skyline Views</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Expansive, unobstructed views stretch from the Denver skyline to the Rocky Mountains, a rare vantage point in the Old South Pearl neighborhood.
+                Expansive, unobstructed views stretch from the Denver skyline to the Rocky Mountains, a rare vantage point in the South Pearl neighborhood.
               </p>
             </div>
           </div>
@@ -659,7 +659,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Private Retreat</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Private rooftop decks provide immediate solitude to focus and recharge. Convenience to the outdoors without having to leave your home.
+                Private rooftop decks can provide multiple unique benefits to accompany urban living, such as immediate solitude to focus and recharge, relaxing views to take in, and convenience to the outdoors without having to leave your home.
               </p>
             </div>
           </div>
@@ -675,7 +675,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Pet Owner Benefit</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Pet owners enjoy the ability to provide exercise and relief at a second's notice with convenient rooftop access.
+                Pet owners enjoy the convenience of providing exercise and relief at a moment's notice.
               </p>
             </div>
           </div>
@@ -726,7 +726,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Higher Visibility</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Corner lots' higher visibility can lead to higher marketability and increased overall value.
+                Corner lots offer greater visibility, leading to higher marketability and increased overall value.
               </p>
             </div>
           </div>
@@ -742,7 +742,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">Better Access</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Corner lots are accessible from multiple convenient locations instead of only a main door front entrance.
+                Corner lots allow access from multiple convenient locations, rather than a single front entrance.
               </p>
             </div>
           </div>
@@ -756,9 +756,9 @@ export default function Home() {
               </svg>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">More Square Footage</h3>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">More Sq Footage</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Corner lots allow building up to the property line without the required 10-foot separation, significantly increasing buildable square footage.
+                Because one of the sides of any corner lot does not have another structure within 10 feet of it, the builder is allowed to build up to the property line and is not required to provide a 10 foot separation between building structures. This significantly increases the overall buildable square footage of the corner lot.
               </p>
             </div>
           </div>
@@ -772,9 +772,9 @@ export default function Home() {
               </svg>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">Enhanced Curb Appeal</h3>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Curb Appeal</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Corner lots enjoy increased natural light, better ventilation, enhanced curb appeal, and more design flexibility.
+                Corner lots benefit from increased natural light, better ventilation, enhanced curb appeal, and more flexibility in design options.
               </p>
             </div>
           </div>
@@ -788,7 +788,7 @@ export default function Home() {
               </svg>
             </div>
             <div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">Unobstructed Views</h3>
+              <h3 className="text-lg font-bold mb-2 text-gray-900">Views</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
                 Residents will enjoy unobstructed views of the surrounding Platt Park neighborhood.
               </p>
@@ -879,7 +879,7 @@ export default function Home() {
           <h3 className="text-xl sm:text-2xl font-bold mb-6 text-gray-900">Sunday Farmers Market</h3>
           <p className="text-gray-600 leading-relaxed">
             With live music and a warm, welcoming spirit, the South Pearl Street Farmers Market supports and
-            enhances the surrounding community with a great variety of fresh and wholesome products.
+            enriches the surrounding community with a wide variety of fresh and wholesome products.
           </p>
         </div>
 
