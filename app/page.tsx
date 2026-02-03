@@ -138,24 +138,24 @@ export default function Home() {
         <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900">General Description</h3>
         <div className="space-y-4 mb-8">
           <p className="text-gray-600 leading-relaxed text-lg">
-            Liv1403 is a unique urban mixed-use project that will be providing high end, luxury residential
-            condominiums with additional street facing store front commercial retail space.
+            Liv1403 is a unique urban mixed-use project designed to deliver high-end, luxury residential
+            condominiums with additional street-facing storefront commercial retail space.
           </p>
         </div>
 
         <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Location</h3>
         <div className="space-y-4 mb-8">
           <p className="text-gray-600 leading-relaxed">
-            Class A+ high-impact, corner lot on Old South Pearl St. in the Platt Park neighborhood in Denver, Colorado.
-            Old South Pearl St. is a high value shopping and dining district located near the University of Denver. It
-            is known for its highly acclaimed shops, boutiques, and restaurants.
+            Class A+, high-impact, corner lot on South Pearl Street in the Platt Park neighborhood of Denver, Colorado.
+            South Pearl Street is a high-value shopping and dining district located near the University of Denver. It
+            is known for its highly acclaimed shops, boutiques, award-winning and Michelin-starred restaurants.
           </p>
         </div>
 
         <h3 className="text-xl sm:text-2xl font-bold mb-4 text-gray-900">Permit Status</h3>
         <div className="space-y-4">
           <p className="text-gray-600 leading-relaxed">
-            Liv1403 construction permits have been approved and the project is shovel ready.
+            Liv1403 construction permits have been approved, and the project is shovel-ready.
           </p>
         </div>
       </div>
@@ -279,8 +279,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-4 text-gray-900">Recent Experience</h3>
               <p className="text-gray-600 leading-relaxed">
-                The Principal, Lance Nading, previously completed 1745 S. Pearl St. an apartment building on Old South
-                Pearl Street, and is deeply familiar with the neighborhood, community, and real estate values.
+                The Principal, Lance Nading, is deeply familiar with the South Pearl Street neighborhood, community, and real estate values. In 2021, for example, he completed the apartment building at 1745 S. Pearl St.
               </p>
             </div>
 
@@ -292,9 +291,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-4 text-gray-900">Liv1403 Condominium Value</h3>
               <p className="text-gray-600 leading-relaxed">
-                Liv1403 condominiums are uniquely located, with cutting edge design, superior construction quality.
-                Finished market value is anticipated to be between $850-$950+ per square foot. Additionally, Liv1403
-                will provide the best in high end luxury finishes and state of the art technology in every unit.
+                Liv1403 condominiums are uniquely located, featuring cutting-edge design, superior construction quality, high-end luxury finishes, and state-of-the-art technology in every unit. Finished market value is anticipated to be between $850-$950+ per square foot.
               </p>
             </div>
 
@@ -304,10 +301,9 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900">First to Market For-Sale Condos</h3>
+              <h3 className="text-xl font-bold mb-4 text-gray-900">One of the First to Market</h3>
               <p className="text-gray-600 leading-relaxed">
-                Liv1403 will be first to market in the Old South Pearl St. submarket, offering the only for-sale
-                exclusive high end luxury condominium purchase opportunity.
+                To the Principal's knowledge, Liv1403 is scheduled to be one of the first for-sale condominium projects available in the South Pearl Street submarket. Different from townhomes or duplexes, Liv1403 aims to offer the only true condominium purchase opportunity, distinguished by exclusive condominium features, such as underground parking, secured elevator access, rooftop decks, and common building security.
               </p>
             </div>
 
@@ -319,9 +315,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold mb-4 text-gray-900">Existing Multi-Family Apartments</h3>
               <p className="text-gray-600 leading-relaxed">
-                Currently, there are three new luxury apartment buildings on old South Pearl St. Each of the apartment
-                buildings offer market rental rates between 3.90 - 5.00 psf per month. Each has extremely low vacancy
-                and often times have wait lists to be approved for tenancy.
+                Currently, there are three new luxury apartment buildings on Old South Pearl St., located at: 1411 S. Pearl St., 1745 S. Pearl St., and 1775 S. Pearl St. Each of the above apartment buildings offers market rental rates between $3.50 - $4.50 per square foot. Each has extremely low vacancy and frequent tenant wait lists. Each building's estimated per square foot market value (using a 5% cap rate calculated on the building's net rental income) exceeds Liv1403's targeted per square foot sale price.
               </p>
             </div>
           </div>
@@ -372,7 +366,7 @@ export default function Home() {
                   <p className="text-gray-600 leading-relaxed">
                     Lance Nading is a Colorado native and third-generation builder. At a very young age, he often "helped"
                     his father at his father's local construction jobsites and earned as much as $1.00 per day! Although
-                    Lance's father Merle's passion was all things construction, the winters were harsh and construction
+                    Lance's father, Merle, was passionate about all things construction, the winters were harsh and construction
                     could be slow, so to supplement his longer-term passion for construction, he also became a Denver
                     Policeman. Sadly, he was killed at the age of 31 in the line of duty in service to his community.
                     However, Merle's work ethic and love of community live on in Lance and keep his memory alive and strong.
@@ -385,11 +379,10 @@ export default function Home() {
                     <h4 className="font-bold text-gray-900 text-xl">Family Trade</h4>
                   </div>
                   <p className="text-gray-600 leading-relaxed">
-                    Through high school and college, Lance worked every summer for his grandfather Henry's construction company.
+                    Throughout high school and college, Lance worked every summer for his grandfather Henry's construction company.
                     Working and learning, Lance quickly became as passionate about construction as his father and grandfather had
                     been. Lance has been a licensed General Contractor since 2000. He has built and developed commercial
-                    restaurants, multifamily apartments and condominiums, and high-end luxury custom homes in the Denver-
-                    Boulder area since 2000. Under his leadership, C3H Construction LLC has always delivered superior projects,
+                    restaurants, multifamily apartments and condominiums, and high-end luxury custom homes in the Denver-Boulder area. Under his leadership, C3H Construction LLC has always delivered superior projects,
                     distinguished by the highest quality, longevity, and long-term value.
                   </p>
                 </div>
@@ -401,9 +394,10 @@ export default function Home() {
                   </div>
                   <p className="text-gray-600 leading-relaxed">
                     Educated at the University of Colorado with a focus on Economics, Business Finance, and Japanese Language
-                    and Literature, his competitive drive extends beyond construction and real estate. As a national-level Judo
+                    and Literature, Lance's competitive drive extends beyond construction and real estate. As a national-level Judo
                     competitor, Lance earned the first alternate position at the 1996 Olympic Games held in Atlanta, Georgia.
-                    He served as President of USA Judo, a member organization of the U.S. Olympic and Paralympic Committee,
+                    For years prior to that, Lance lived and trained at the U.S. Olympic Training Center in Colorado Springs and Keio
+                    University in Tokyo, Japan. He served as President of USA Judo, a member organization of the U.S. Olympic and Paralympic Committee,
                     from 2008-2016. During that time period, more Olympic medals were achieved by American Judo athletes than
                     in any other comparable period of the organization's history to date.
                   </p>
@@ -415,7 +409,7 @@ export default function Home() {
                     <h4 className="font-bold text-gray-900 text-xl">Leadership</h4>
                   </div>
                   <p className="text-gray-600 leading-relaxed">
-                    Lance's reputation reflects his leadership; each project is approached with a hands-on commitment to excellence
+                    Lance's reputation reflects his leadership. Each project is approached with a hands-on commitment to excellence
                     resulting in enduring client, buyer, and investor relationships, as well as developments that enhance the fabric of
                     the Denver communities in which they are located.
                   </p>
@@ -428,8 +422,8 @@ export default function Home() {
                   </div>
                   <p className="text-gray-600 leading-relaxed">
                     Lance currently resides in Greenwood Village, Colorado, with his wife Wendy of 30 years. They have two grown
-                    children: McKenna, age 24, living in Seattle, Washington and thriving in the tech world, and Cole, age 23, a recent
-                    Computer Science graduate of Colorado State University, who is also thriving in his growing business and tech
+                    children: McKenna, age 24, who lives in Seattle, Washington and thrives in the tech world; and Cole, age 23, a recent
+                    Computer Science graduate of Colorado State University, who is excelling in his growing business and tech
                     interests.
                   </p>
                 </div>
