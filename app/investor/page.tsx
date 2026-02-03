@@ -1041,7 +1041,7 @@ const handleToggleUserStatus = async (userId: string) => {
                           <div>
                             <div className="font-semibold text-gray-900">Tier 3: Cumulative Preferred Return 15%</div>
                             <div className="text-sm text-gray-600 mt-1">
-                              70% of subsequent distributions are made to the Members and 30% to the Manager, until the Members receive a 15% annual return on their contributed funds
+                              70% of subsequent distributions are made to the Members and 30% to the Manager, until the Members receive a cumulative 15% annual return on their contributed funds
                             </div>
                           </div>
                           <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">70/30</span>
@@ -1256,9 +1256,9 @@ const handleToggleUserStatus = async (userId: string) => {
                   </div>
 
                   <div className="mt-4 p-4 bg-green-50 rounded-lg">
-                    <div className="font-semibold text-green-900 mb-2">First to Market For-Sale Condos</div>
+                    <div className="font-semibold text-green-900 mb-2">One of the First to Market</div>
                     <div className="text-sm text-green-800">
-                      Liv1403 will be first to market in the Old South Pearl St. submarket, offering the only for-sale exclusive high end luxury condominium purchase opportunity.
+                      To the Principal's knowledge, Liv1403 is scheduled to be one of the first for-sale condominium projects available in the South Pearl Street submarket. Different from townhomes or duplexes, Liv1403 aims to offer the only true condominium purchase opportunity, distinguished by exclusive condominium features, such as underground parking, secured elevator access, rooftop decks, and common building security.
                     </div>
                   </div>
                 </div>
@@ -1268,7 +1268,7 @@ const handleToggleUserStatus = async (userId: string) => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Experience</h3>
                   <div className="space-y-4">
                     <p className="text-gray-700">
-                      The Principal, Lance Nading, previously completed 1745 S. Pearl St. an apartment building on Old South Pearl Street, and is deeply familiar with the neighborhood, community, and real estate values.
+                      The Principal, Lance Nading, is deeply familiar with the South Pearl Street neighborhood, community, and real estate values. In 2021, for example, he completed the apartment building at 1745 S. Pearl St.
                     </p>
                   </div>
                 </div>
@@ -1283,7 +1283,7 @@ const handleToggleUserStatus = async (userId: string) => {
                         <span className="font-semibold text-gray-900">$850 - $950+ per square foot</span>
                       </div>
                       <p className="text-sm text-gray-600">
-                        Liv1403 condominiums are uniquely located, with cutting edge design, superior construction quality. Finished market value is anticipated to be between $850-$950+ per square foot. Additionally, Liv1403 will provide the best in high end luxury finishes and state of the art technology in every unit.
+                        Liv1403 condominiums are uniquely located, featuring cutting-edge design, superior construction quality, high-end luxury finishes, and state-of-the-art technology in every unit. Finished market value is anticipated to be between $850-$950+ per square foot.
                       </p>
                     </div>
                   </div>
